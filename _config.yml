@@ -13,7 +13,7 @@
 title: Stark4N6
 
 # Your name to show in the footer
-author: Kevin Pagno
+author: Kevin Pagano
 
 ###############################################
 # --- List of links in the navigation bar --- #
@@ -22,9 +22,8 @@ author: Kevin Pagno
 navbar-links:
   About Me: "aboutme"
   Resources:
-    - Beautiful Jekyll: "https://beautifuljekyll.com"
-    - Learn markdown: "https://www.markdowntutorial.com/"
-  Author's home: "https://deanattali.com"
+    - Forensic StartMe: "https://startme.stark4n6.com"
+  Home: "https://stark4n6.github.io"
 
 ################
 # --- Logo --- #
