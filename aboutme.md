@@ -1,16 +1,12 @@
 ---
 layout: page
 title: About me
-subtitle: Why you'd want to go on a date with me
+subtitle:
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+Inspired by a tech genius billionaire and my favorite comic book character I bring you STARK 4N6! I hope to share forensic research, findings, experiences, travels and everything in between.
 
-- I rock a great mustache
-- I'm extremely loyal to my family
-
-What else do you need?
+Like this site, I'm a work in progress. I'm always learning and ever striving to better myself and others around me.
 
 ### My story
-
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+COMING SOON!
