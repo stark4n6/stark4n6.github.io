@@ -42,9 +42,6 @@ round-avatar: false
 # then specify the following parameter
 title-img: "/assets/img/logo.jpg"
 
-cover-img: "/assets/img/circuit-board.jpg"
-
-
 #####################################
 # --- Footer social media links --- #
 #####################################
