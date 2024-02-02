@@ -10,7 +10,7 @@
 ############################
 
 # Name of website
-title: Stark 4N6
+title: STARK 4N6
 
 # Your name to show in the footer
 author: Kevin Pagano
@@ -39,6 +39,8 @@ round-avatar: false
 # If you want to have an image logo in the top-left corner instead of having the title of the website,
 # then specify the following parameter
 title-img: "/assets/img/logo.jpg"
+
+cover-img: "/assets/img/circuit-board.jpg"
 
 
 #####################################
