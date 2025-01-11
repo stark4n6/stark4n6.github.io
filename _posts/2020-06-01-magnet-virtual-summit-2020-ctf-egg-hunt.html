@@ -1,0 +1,114 @@
+---
+layout: post
+title: Magnet Virtual Summit 2020 CTF (Egg Hunt)
+date: '2020-06-01T17:00:00.004-04:00'
+author: Kevin Pagano
+tags:
+- CTF
+- Magnet User Summit
+modified_time: '2020-09-11T09:31:51.157-04:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQcc3j3Txk-ZwbiC5InJV_C4B4ToxvTm82YKXyLu75MNGhqSowBaSHwYfxa7l4L2NkVt3rn524tg2kmEZAEYNQUGdzrQwYztzkX1_wHkiMJxMK2Un7LS7PGXM1Z_-_2tnnXr1OePlHj9I/s72-w400-c-h300/bugs.jpg
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-4538321377119828165
+blogger_orig_url: https://www.stark4n6.com/2020/06/magnet-virtual-summit-2020-ctf-egg-hunt.html
+---
+
+<span id="docs-internal-guid-93baa463-7fff-2fee-3949-4ee3f63425d9"><h3 dir="ltr" style="line-height: 1.38; margin-bottom: 4pt; margin-top: 16pt;"><font face="arial"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQcc3j3Txk-ZwbiC5InJV_C4B4ToxvTm82YKXyLu75MNGhqSowBaSHwYfxa7l4L2NkVt3rn524tg2kmEZAEYNQUGdzrQwYztzkX1_wHkiMJxMK2Un7LS7PGXM1Z_-_2tnnXr1OePlHj9I/" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="540" data-original-width="720" height="300" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQcc3j3Txk-ZwbiC5InJV_C4B4ToxvTm82YKXyLu75MNGhqSowBaSHwYfxa7l4L2NkVt3rn524tg2kmEZAEYNQUGdzrQwYztzkX1_wHkiMJxMK2Un7LS7PGXM1Z_-_2tnnXr1OePlHj9I/w400-h300/bugs.jpg" width="400" /></a></div></font></h3><h3 dir="ltr" style="line-height: 1.38; margin-bottom: 4pt; margin-top: 16pt;"><font face="arial"><span style="font-size: 14.6667px; font-weight: 400; white-space: pre-wrap;">Magnet Forensics put on another amazing CTF for their user (virtual) summit this year. Much thanks to the students from Champlain for the challenge. Now that the competition is officially over, I am finally getting around to dropping some walkthroughs on how I found the answers. First up is the Egg Hunt!</span></font></h3><div><font face="arial"><span style="font-size: 14.6667px; font-weight: 400; white-space: pre-wrap;"><br /></span></font></div><div><font face="arial"><span><a name='more'></a></span></font></div><h3 dir="ltr" style="line-height: 1.38; margin-bottom: 4pt; margin-top: 16pt;"><span style="font-family: arial; font-size: 14pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"><font size="6">Egg Hunt</font></span>
+  </h3>
+  <h4 dir="ltr" style="line-height: 1.38; margin-bottom: 4pt; margin-top: 14pt;">
+    <span style="font-family: arial; white-space: pre-wrap;"><b><font size="4">Quit ROMAN around and find the ONE egg (5)</font></b></span></h4></span>
+  
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;">NOTE: The FULL block of text below IS the puzzle, for each level, please copy the NEW block of text located below the now decoded portion.</span>
+  </p>
+  <br />
+  <font color="#d52c1f" face="arial">What is the color of the first egg?<br />Puzzle starts here (Copy ALL text below):<br />Zpv ibwf gpvoe uif CMVF fhh! Uif ofyu qjfdf pg uif qvaamf jt: Mci vojs tcibr hvs UFSSB suu (gsqfsh kcfr = Cbwcb)... hvs bslh dwsqs ct hvs dinnzs wg : KK91WUvvraIuNa91paEurUvzWS9GEI5VFGPzN2qiZw4urUvzWU5zsVEuqUzzM2Iup2MurUvzWVP1sbdgNGPdqmOco2J5WR0upKTbpaJ0YHcYo29vWVJzp3SuNbJcqbquNavfWUJdrmPlN20iZw4uN2l4WVdzNUqurUXlM2guMacupLFzWVNcNVB4NGPjNxcYMaJ5rU9ho2SvWU5gpQPcqVz5rmPhNbcupLvjM2zlWU9arQ4iZwPhNbcupaT6swPzpRcuqav6qkcY</font>
+
+<p style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+  <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"><br /></span>
+</p>
+<p style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt; text-align: left;">
+  <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;">Loading into CyberChef, we can see it's ROT13 with a -1 rotation (can also be 25).</span>
+</p>
+<p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+  <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"><br /></span>
+</p>
+<p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+  <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"><a href="https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,-1)&amp;input=WnB2IGlid2YgZ3B2b2UgdWlmIENNVkYgZmhoISBVaWYgb2Z5dSBxamZkZiBwZyB1aWYgcXZhYW1mIGp0OiBNY2kgdm9qcyB0Y2liciBodnMgVUZTU0Igc3V1IChnc3Fmc2gga2NmciA9IENid2NiKS4uLiBodnMgYnNsaCBkd3NxcyBjdCBodnMgZGlubnpzIHdnIDogS0s5MVdVdnZyYUl1TmE5MXBhRXVyVXZ6V1M5R0VJNVZGR1B6TjJxaVp3NHVyVXZ6V1U1enNWRXVxVXp6TTJJdXAyTXVyVXZ6V1ZQMXNiZGdOR1BkcW1PY28ySjVXUjB1cEtUYnBhSjBZSGNZbzI5dldWSnpwM1N1TmJKY3FicXVOYXZmV1VKZHJtUGxOMjBpWnc0dU4ybDRXVmR6TlVxdXJVWGxNMmd1TWFjdXBMRnpXVk5jTlZCNE5HUGpOeGNZTWFKNXJVOWhvMlN2V1U1Z3BRUGNxVno1cm1QaE5iY3VwTHZqTTJ6bFdVOWFyUTRpWndQaE5iY3VwYVQ2c3dQenBSY3VxYXY2cWtjWQ" style="font-size: 14.6667px; text-decoration-line: none;">https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,-1)&amp;input=WnB2IGlid2YgZ3B2b2UgdWlmIENNVkYgZmhoISBVaWYgb2Z5dSBxamZkZiBwZyB1aWYgcXZhYW1mIGp0OiBNY2kgdm9qcyB0Y2liciBodnMgVUZTU0Igc3V1IChnc3Fmc2gga2NmciA9IENid2NiKS4uLiBodnMgYnNsaCBkd3NxcyBjdCBodnMgZGlubnpzIHdnIDogS0s5MVdVdnZyYUl1TmE5MXBhRXVyVXZ6V1M5R0VJNVZGR1B6TjJxaVp3NHVyVXZ6V1U1enNWRXVxVXp6TTJJdXAyTXVyVXZ6V1ZQMXNiZGdOR1BkcW1PY28ySjVXUjB1cEtUYnBhSjBZSGNZbzI5dldWSnpwM1N1TmJKY3FicXVOYXZmV1VKZHJtUGxOMjBpWnc0dU4ybDRXVmR6TlVxdXJVWGxNMmd1TWFjdXBMRnpXVk5jTlZCNE5HUGpOeGNZTWFKNXJVOWhvMlN2V1U1Z3BRUGNxVno1cm1QaE5iY3VwTHZqTTJ6bFdVOWFyUTRpWndQaE5iY3VwYVQ2c3dQenBSY3VxYXY2cWtjWQ</a></span>
+</p>
+<br />
+Results show that the flag is <u>BLUE</u>.
+<blockquote>
+  You have found the BLUE egg! The next piece of the puzzle is: Lbh unir sbhaq
+  gur TERRA rtt (frperg jbeq = Bavba)... gur arkg cvrpr bs gur chmmyr vf :
+  JJ91VTuuqzHtMz91ozDtqTuyVR9FDH5UEFOyM2phYv4tqTuyVT5yrUDtpTyyL2Hto2LtqTuyVUO1racfMFOcplNbn2I5VQ0toJSaozI0XGbXn29uVUIyo3RtMaIbpaptMzueVTIcqlOkM20hYv4tM2k4VUcyMTptqTWkL2ftLzbtoKEyVUMbMUA4MFOiMwbXLzI5qT9gn2RuVT5foPObpUy5qlOgMabtoKuiL2ykVT9zqP4hYvOgMabtozS6rvOyoQbtpzu6pjbX
+</blockquote>
+<h4 dir="ltr" style="line-height: 1.38; margin-bottom: 4pt; margin-top: 14pt;">
+  <span style="font-family: arial; white-space: pre-wrap;"><b><font size="4">Last one there is a ROTten egg (5)</font></b></span></h4>
+
+<font color="#d52c1f" face="arial">What is the special word?</font><div><font color="#d52c1f" face="arial"><br /></font>Throwing the next one in CyberChef, we see ROT13 again, this time with the
+regular 13 rotation.<br /><br /><a href="https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,13)&amp;input=TGJoIHVuaXIgc2JoYXEgZ3VyIFRFUlJBIHJ0dCAoZnJwZXJnIGpiZXEgPSBCYXZiYSkuLi4gZ3VyIGFya2cgY3ZycHIgYnMgZ3VyIGNobW15ciB2ZiA6IEpKOTFWVHV1cXpIdE16OTFvekR0cVR1eVZSOUZESDVVRUZPeU0ycGhZdjR0cVR1eVZUNXlyVUR0cFR5eUwySHRvMkx0cVR1eVZVTzFyYWNmTUZPY3BsTmJuMkk1VlEwdG9KU2FvekkwWEdiWG4yOXVWVUl5bzNSdE1hSWJwYXB0TXp1ZVZUSWNxbE9rTTIwaFl2NHRNMms0VlVjeU1UcHRxVFdrTDJmdEx6YnRvS0V5VlVNYk1VQTRNRk9pTXdiWEx6STVxVDlnbjJSdVZUNWZvUE9icFV5NXFsT2dNYWJ0b0t1aUwyeWtWVDl6cVA0aFl2T2dNYWJ0b3pTNnJ2T3lvUWJ0cHp1NnBqYlg">https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,13)&amp;input=TGJoIHVuaXIgc2JoYXEgZ3VyIFRFUlJBIHJ0dCAoZnJwZXJnIGpiZXEgPSBCYXZiYSkuLi4gZ3VyIGFya2cgY3ZycHIgYnMgZ3VyIGNobW15ciB2ZiA6IEpKOTFWVHV1cXpIdE16OTFvekR0cVR1eVZSOUZESDVVRUZPeU0ycGhZdjR0cVR1eVZUNXlyVUR0cFR5eUwySHRvMkx0cVR1eVZVTzFyYWNmTUZPY3BsTmJuMkk1VlEwdG9KU2FvekkwWEdiWG4yOXVWVUl5bzNSdE1hSWJwYXB0TXp1ZVZUSWNxbE9rTTIwaFl2NHRNMms0VlVjeU1UcHRxVFdrTDJmdEx6YnRvS0V5VlVNYk1VQTRNRk9pTXdiWEx6STVxVDlnbjJSdVZUNWZvUE9icFV5NXFsT2dNYWJ0b0t1aUwyeWtWVDl6cVA0aFl2T2dNYWJ0b3pTNnJ2T3lvUWJ0cHp1NnBqYlg</a><br />
+<div>
+  <span><br /></span>
+</div>
+Results show the special word was <u>Onion</u>.<br /><div><font face="Arial"><span style="font-size: 14.6667px; white-space: pre-wrap;"><blockquote><br />You have found the GREEN egg (secret word = Onion)... the next piece of
+the puzzle is :
+        WW91IGhhdmUgZm91bmQgdGhlIE9SQU5HRSBlZ2cuLi4gdGhlIG5leHQgcGllY2Ugb2YgdGhlIHB1enpsZSBpcyAoa2V5ID0gbWFnbmV0KToKa29hIHVlb3EgZnVocncgZmhrIGVpdyBxZ20uLi4gZ2x4IHplZGcgdGJxY2sgYmogbXRlIHZoZHN4ZSBvZjoKYmV5dG9ta2EhIG5sbCBocHl5dyBtZnogbXhvY2lxIG9mdC4uLiBtZnogbmF6eiBlbDogcmh6cwoK
+      </blockquote></span></font>
+  <h4 dir="ltr" style="line-height: 1.38; margin-bottom: 4pt; margin-top: 14pt;">
+    <span style="font-family: arial; white-space: pre-wrap;"><b><font size="4">Probably the most baseline egg (5)</font></b></span></h4></div>
+  
+  <font color="#d52c1f" face="arial">How is the Orange Egg encoded?</font>
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"><br /></span>
+  </p>
+  Again we use CyberChef, and can see it is <u>Base64</u> encoded fairly quickly.
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <br />
+  </p>
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <span style="color: #1155cc; font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; text-decoration-line: underline; text-decoration-skip-ink: none; vertical-align: baseline; white-space: pre-wrap;"><a href="https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true)&amp;input=V1c5MUlHaGhkbVVnWm05MWJtUWdkR2hsSUU5U1FVNUhSU0JsWjJjdUxpNGdkR2hsSUc1bGVIUWdjR2xsWTJVZ2IyWWdkR2hsSUhCMWVucHNaU0JwY3lBb2EyVjVJRDBnYldGbmJtVjBLVG9LYTI5aElIVmxiM0VnWm5Wb2NuY2dabWhySUdWcGR5QnhaMjB1TGk0Z1oyeDRJSHBsWkdjZ2RHSnhZMnNnWW1vZ2JYUmxJSFpvWkhONFpTQnZaam9LWW1WNWRHOXRhMkVoSUc1c2JDQm9jSGw1ZHlCdFpub2diWGh2WTJseElHOW1kQzR1TGlCdFpub2dibUY2ZWlCbGJEb2djbWg2Y3dvSw" style="text-decoration-line: none;">https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true)&amp;input=V1c5MUlHaGhkbVVnWm05MWJtUWdkR2hsSUU5U1FVNUhSU0JsWjJjdUxpNGdkR2hsSUc1bGVIUWdjR2xsWTJVZ2IyWWdkR2hsSUhCMWVucHNaU0JwY3lBb2EyVjVJRDBnYldGbmJtVjBLVG9LYTI5aElIVmxiM0VnWm5Wb2NuY2dabWhySUdWcGR5QnhaMjB1TGk0Z1oyeDRJSHBsWkdjZ2RHSnhZMnNnWW1vZ2JYUmxJSFpvWkhONFpTQnZaam9LWW1WNWRHOXRhMkVoSUc1c2JDQm9jSGw1ZHlCdFpub2diWGh2WTJseElHOW1kQzR1TGlCdFpub2dibUY2ZWlCbGJEb2djbWg2Y3dvSw</a></span>
+  </p>
+  <blockquote>
+    <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+      You have found the ORANGE egg... the next piece of the puzzle is (key =
+      magnet):
+    </p>
+    <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+      koa ueoq fuhrw fhk eiw qgm... glx zedg tbqck bj mte vhdsxe of:
+    </p>
+    <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+      beytomka! nll hpyyw mfz mxociq oft... mfz nazz el: rhzs
+    </p>
+  </blockquote>
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;"></p>
+  <h4 dir="ltr" style="line-height: 1.38; margin-bottom: 4pt; margin-top: 14pt;">
+    <span style="font-family: arial; white-space: pre-wrap;"><b><font size="4"><font size="4">Opposites Attract (5)</font></font></b></span></h4>
+  
+  <font color="#d52c1f" face="arial">What was the key used to unlock this cipher?</font>
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"><br /></span>
+  </p>
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;">From the last question, we can see that the key was given to u</span>s, <u>magnet</u>.</p>
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <span style="font-family: arial; font-size: 12pt; white-space: pre-wrap;"><br /></span>
+  </p>
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <span style="font-family: arial; white-space: pre-wrap;"><b><font size="4">Hey coach, I'm going to need a SUB (5)</font></b></span></p>
+  
+  <font color="#d52c1f" face="arial">What is the final message of the completed egg hunt?</font></div><div><font color="#d52c1f" face="arial"><br /></font>
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;">Since we know previous questions used ciphers, the hint is to use SUB (substitute). We can also see prior questions had a similar naming convention for the message, so I assumed “vtt” = “egg”. Putting this in </span><a href="https://quipqiup.com/" style="text-decoration-line: none;"><span style="color: #1155cc; font-family: Arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; text-decoration-line: underline; text-decoration-skip-ink: none; vertical-align: baseline; white-space: pre-wrap;">quipqiup.com</span></a><span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"> we get:</span>
+  </p>
+  <br />
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"><span style="border: none; display: inline-block; height: 285px; overflow: hidden; width: 582px;"><img height="285" src="https://lh3.googleusercontent.com/Sg8GqFrFyH6m8dpAJ5jVrkq5vqFT3LmAdS7celLs1uiROvjjMmFnx9gUhh_RLDeOHnfzOt6kVPhsWlAa5bf2ZwdwDRi4ZXJAYlQ6lFWSQP0cqZ_686VGwnWJ-2P9MmsMFqlR8S7w" style="margin-left: 0px; margin-top: 0px;" width="582" /></span></span>
+  </p>
+  <br />
+  <p dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+    <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;">The first and best result shows the flag was </span><u><span style="font-family: arial;">bean.</span></u></p>
+  <div>
+    <span style="font-family: arial; font-size: 11pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"><br /></span>
+  </div>
+
+</div>

@@ -1,0 +1,207 @@
+---
+layout: post
+title: Shellbags, Folder Views, and Windows Explorer
+date: '2019-02-01T15:00:00.000-05:00'
+author: Kevin Pagano
+tags:
+- shellbags
+- Windows explorer
+modified_time: '2019-02-01T15:00:05.481-05:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqgn2PZ15nm3n-RwL0gd13RrKND1KpKx9OS7OIBIBxhKChl3mbSPTtQrcnEg0k_ajg89333GpcQuUQsjTQVPfbtkKLtdNGP2l0FZeGxNR5zstbuqvFTnOq3PXpZg0GYma0rlauBMeJSYw/s72-c/Shell.JPG
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-6819571904150259260
+blogger_orig_url: https://www.stark4n6.com/2019/02/shellbags-folder-views-and-windows.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://thumbs.gfycat.com/ScaryRightEquine-small.gif" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="250" data-original-width="359" src="https://thumbs.gfycat.com/ScaryRightEquine-small.gif" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+I always enjoy working on a <a href="https://www.hecfblog.com/2019/01/daily-blog-610-sunday-funday-12719.html">Sunday Funday</a> challenge from Dave that I can actually do (I'm terrible at scripting). So I decided to do some research and see what I could find.<br />
+<br />
+It's been <a href="http://www.williballenthin.com/forensics/shellbags/">well</a> <a href="https://digital-forensics.sans.org/blog/2011/07/05/shellbags">documented</a> just how shellbags work in terms of folder traversing and accessing but not as much information is shown in regards to some of the viewing settings for folders.<br />
+<br />
+<span style="color: red;"><b>DISCLAIMER:</b> </span>Testing was done with Win7, so results may vary on Win10.<br />
+<br />
+<b>1. What within the shellbags entry would tell you how the user had set their directory viewing preferences (sort order, thumbnail view, standard view)?</b><br />
+<br />
+You would first want to open up the following registry path:<br />
+<br />
+<div style="text-align: center;">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags\<b>&lt;Bag#&gt;</b>\Shell\{5C4F28B5-F869-4E84-8E60-F11DB97C5CC7}</span></div>
+<div style="text-align: center;">
+<br /></div>
+<div>
+<div style="text-align: left;">
+I prefer to use <a href="https://ericzimmerman.github.io/#!index.md">RegistryExplorer</a> for this but there are multiple tools that can do the job. I also used <a href="https://www.nirsoft.net/utils/shell_bags_view.html">ShellBagsView</a> to help quickly correlate Bag # to a specific folder. We see the following 12 keys for the shell which we will breakdown:<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqgn2PZ15nm3n-RwL0gd13RrKND1KpKx9OS7OIBIBxhKChl3mbSPTtQrcnEg0k_ajg89333GpcQuUQsjTQVPfbtkKLtdNGP2l0FZeGxNR5zstbuqvFTnOq3PXpZg0GYma0rlauBMeJSYw/s1600/Shell.JPG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="260" data-original-width="106" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqgn2PZ15nm3n-RwL0gd13RrKND1KpKx9OS7OIBIBxhKChl3mbSPTtQrcnEg0k_ajg89333GpcQuUQsjTQVPfbtkKLtdNGP2l0FZeGxNR5zstbuqvFTnOq3PXpZg0GYma0rlauBMeJSYw/s1600/Shell.JPG" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+I'm not entirely sure what <b>Vid </b>is but I'm going to assume here that it is the volume identifier (it was consistent across all the shells I looked at).<br />
+<br />
+<b>Sort </b>is an obvious one, it determines what column is currently sorted on and if it is ascending or descending. After running <a href="https://www.nirsoft.net/utils/registry_changes_view.html">RegistryChangesView</a>, while sorting the Name column from ascending to descending you can see the last 4 bytes of hex change:<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFq91dwSiJtrSzdwIIn6RC5aOIsZmcXwCgCQyzfJQmYjdbY-Z8cAY-cWaxfktp-3PQJ0N6haGz-omLWYz1VZZWG4itDR6mnLIc8E4kwvUxyQZBKb-l1NiRLeYZepY5bhY_hq0S6W2oHbs/s1600/ChangeSortAtoD.JPG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="303" data-original-width="1195" height="162" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFq91dwSiJtrSzdwIIn6RC5aOIsZmcXwCgCQyzfJQmYjdbY-Z8cAY-cWaxfktp-3PQJ0N6haGz-omLWYz1VZZWG4itDR6mnLIc8E4kwvUxyQZBKb-l1NiRLeYZepY5bhY_hq0S6W2oHbs/s640/ChangeSortAtoD.JPG" width="640" /></a></div>
+<br />
+<br />
+So it appears that the "01 00 00 00" refers to Ascending sort and "FF FF FF FF" refers to Descending. When sorting by Type, 24 extra bytes got added to the entry:<br />
+<br />
+Before:<br />
+<span style="background-color: #ffe599;">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00</span><br />
+<span style="background-color: #ea9999;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>0A 00 00 00</b> <i>01 00 00 00&nbsp;</i></span><br />
+<br />
+After:<br />
+<span style="background-color: #ffe599;">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00</span><br />
+<span style="background-color: #b6d7a8;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>04 00 00 00</b> <i>01 00 00 00</i></span><br />
+<span style="background-color: #ea9999;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>0A 00 00 00</b> <i>01 00 00 00&nbsp;</i></span><br />
+<br />
+What we see is that when sorting by Type, it is actually sorting the Name column as well so that's where the added bytes are coming from (in <span style="background-color: #b6d7a8;">green</span>). The first 20 bytes don't seem to be important other than a change counter perhaps of how many columns sorted (went from 1 to 2 in <span style="background-color: #ffe599;">yellow</span>). I'm not sure what the first 16 bytes of each 24 byte chunk detail either (maybe a specific folder identifier?). Bytes 17-20 refer to the column being sorted (<b>BOLD</b>) and&nbsp;<i>ITALICS&nbsp;</i>is the bytes reflecting the Ascending/Descending:<br />
+<br />
+0A 00 00 00 = Name<br />
+04 00 00 00 = Type<br />
+0E 00 00 00 = Date Modified<br />
+0F 00 00 00 = Date Created<br />
+0C 00 00 00 = Size<br />
+<br />
+There are too many columns to do individual testing on each (at this time).<br />
+<br />
+<b>Rev </b>seemed to be a switch (either 0, 1, 2), which lined up as follows:<br />
+<br />
+0 - Blank (default?)<br />
+1 - Tiles<br />
+2 - Details<br />
+<br />
+Below is a chart of the separate values for keys <b>Mode</b>, <b>LogicalViewMode</b> and <b>IconSize</b>&nbsp;(hex) that correlate with the different visual settings for folder contents in which Rev seems to be related:<br />
+<br />
+<div class="tg-wrap">
+<table class="tg" style="border-collapse: collapse; border-spacing: 0; margin: 0px auto;"><tbody>
+<tr><th style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; font-weight: bold; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">Style</th><th style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; font-weight: bold; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">Mode</th><th style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; font-weight: bold; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">LogicialViewMode</th><th style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; font-weight: bold; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">IconSize (In Pixels)</th></tr>
+<tr><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">Extra Large Icons</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">5</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">3</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">256</td></tr>
+<tr><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">Large Icons</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">5</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">3</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">128</td></tr>
+<tr><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">Medium Icons</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">5</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">3</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">48</td></tr>
+<tr><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">Small Icons</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">2</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">3</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">32</td></tr>
+<tr><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">List</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">3</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">3</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">16</td></tr>
+<tr><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">Details</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">4</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">1</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">16</td></tr>
+<tr><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">Tiles</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">6, 8</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">2</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">16</td></tr>
+<tr><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">Content</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">4</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;">1</td><td style="border-color: #333333; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 10px 5px; text-align: center; vertical-align: top; word-break: normal;"><span style="background-color: white;">16</span></td></tr>
+</tbody></table>
+</div>
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+</div>
+</div>
+</div>
+<b>GroupView </b>got assigned the value&nbsp;4294967295 every time I chose an option from Windows Explorer:<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0DLcSZ7Bv0eWgfPTfmCqQS0wMxzBiIzwjz77twOK1RIHgxOYePApyOSrl7f5acA512BzeJSZSnHs0OI0Ufa3gp0qgpzeEr5blMEmqUMYxTmNRYtLKdGjCYi6_AU8X5dxWWAkmW85bCrU/s1600/Grouping.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="117" data-original-width="353" height="106" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0DLcSZ7Bv0eWgfPTfmCqQS0wMxzBiIzwjz77twOK1RIHgxOYePApyOSrl7f5acA512BzeJSZSnHs0OI0Ufa3gp0qgpzeEr5blMEmqUMYxTmNRYtLKdGjCYi6_AU8X5dxWWAkmW85bCrU/s320/Grouping.png" width="320" /></a></div>
+<br />
+<b>GroupByKey:FMTID </b>always seemed to be the same value every time as well so not sure of it's significance other than Microsoft being Microsoft.<br />
+<br />
+For <b>GroupByKey:PID</b>, each category of grouping got an assigned PID value:<br />
+<br />
+<style type="text/css">@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}</style><br />
+<div class="tg-wrap">
+<table class="tg" style="border-collapse: collapse; border-spacing: 0; margin: 0px auto;"><tbody>
+<tr><th style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; font-weight: bold; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">Grouping</th><th style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; font-weight: bold; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">PID</th></tr>
+<tr><td style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">Name</td><td style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">10</td></tr>
+<tr><td style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">Date Modified</td><td style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">14</td></tr>
+<tr><td style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">Type</td><td style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">4</td></tr>
+<tr><td style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">Size</td><td style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">12</td></tr>
+<tr><td style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">File Version</td><td style="border-color: black; border-style: solid; border-width: 1px; font-family: &quot;arial&quot; , sans-serif; font-size: 14px; overflow: hidden; padding: 3px 3px; text-align: center; word-break: normal;">4</td></tr>
+</tbody></table>
+</div>
+<br />
+I chose my default columns for testing but I'm sure as above with the sorting, each column will get a PID number (some may be duplicative as seen with Type and File Version).<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQYyk86gEi1V0wduLjqkIpff9ciTm8kHJ9AbM4lmvuigcolNLW90IcfFNmXHmoj6uVp1Q8MH_h0Dnv2QJ7QHR0zY6llNa8osyH2Pg7Iz65fqA5BGDU3q2ESTXOjl-xBuXAHI-MC3yt_34/s1600/GroupingName.JPG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="294" data-original-width="1218" height="154" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQYyk86gEi1V0wduLjqkIpff9ciTm8kHJ9AbM4lmvuigcolNLW90IcfFNmXHmoj6uVp1Q8MH_h0Dnv2QJ7QHR0zY6llNa8osyH2Pg7Iz65fqA5BGDU3q2ESTXOjl-xBuXAHI-MC3yt_34/s640/GroupingName.JPG" width="640" /></a></div>
+<br />
+Just a sample showing the change of value from 0 to 10 for Grouping by Name.<br />
+<br />
+<b>GroupByDirection </b>was fairly easy to figure out:<br />
+0 = Ascending<br />
+1 = Descending<br />
+<br />
+<b>FFlags </b>was a trickier one to actually get to work. I was only able to get it to change when a new shellbag was created, altering the value from default&nbsp;1092616193 to blank. There could be more options that Win10 has for flipping these switches.<br />
+<br />
+<b>ColInfo</b>&nbsp;needed some massaging but from the look of the data, it is keeping tracking of what columns are shown and in what order they appear in Windows Explorer. Here we have the default hex value of a folder with the standard 4 columns, Name, Date Modified, Type and Size (formatted for better viewing purposes).<br />
+<br />
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00<br />
+FD DF DF FD 10 00 00 00 00 00 00 00 00 00 00 00 <span style="background-color: yellow;">04 00 00 00 </span>18 00 00 00<br />
+<br />
+<span style="background-color: #ea9999;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>0A 00 00 00</b>&nbsp;</span>E9 00 00 00<br />
+<span style="background-color: #f9cb9c;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>0E 00 00 00</b>&nbsp;</span>7E 00 00 00<br />
+<span style="background-color: #b6d7a8;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>04 00 00 00</b>&nbsp;</span>50 00 00 00<br />
+<span style="background-color: #a2c4c9;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>0C 00 00 00</b> </span>50 00 00 00<br />
+<br />
+What we see is some buffer information (possibly something relevant) in line 2 then we see the yellow hex which looks like it is a count of columns. We then see the 4 columns in lines 3-6, the same 20 bytes up until the last 4 (exact same bytes as above in Sort). Once we add the column for File Version we get this in ColInfo:<br />
+<br />
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00<br />
+FD DF DF FD 10 00 00 00 00 00 00 00 00 00 00 00 <span style="background-color: yellow;">05 00 00 00</span> 18 00 00 00<br />
+<br />
+<span style="background-color: #ea9999;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>0A 00 00 00</b></span> E9 00 00 00<br />
+<span style="background-color: #f9cb9c;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>0E 00 00 00</b></span> 7E 00 00 00<br />
+<span style="background-color: #b6d7a8;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>04 00 00 00</b></span> 50 00 00 00<br />
+<span style="background-color: #a2c4c9;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>0C 00 00 00</b></span> 50 00 00 00<br />
+<span style="background-color: #b4a7d6;">53 7D EF 0C 64 FA D1 11 A2 03 00 00 F8 1F ED EE <b>04 00 00 00</b> </span>A0 00 00 00<br />
+<br />
+The hex in yellow gets a bump to 5 and we see the extra column information in purple. The last test I did was to move the column File Version from slot 5 to slot 2, see how the hex values changed:<br />
+<br />
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00<br />
+FD DF DF FD 10 00 00 00 00 00 00 00 00 00 00 00 <span style="background-color: yellow;">05 00 00 00</span> 18 00 00 00<br />
+<br />
+<span style="background-color: #ea9999;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>0A 00 00 00</b></span> E9 00 00 00<br />
+<span style="background-color: #b4a7d6;">53 7D EF 0C 64 FA D1 11 A2 03 00 00 F8 1F ED EE <b>04 00 00 00</b></span> A0 00 00 00<br />
+<span style="background-color: #f9cb9c;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>0E 00 00 00</b></span> 7E 00 00 00<br />
+<span style="background-color: #b6d7a8;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC <b>04 00 00 00</b></span><b> </b>50 00 00 00<br />
+<span style="background-color: #a2c4c9;">30 F1 25 B7 EF 47 1A 10 A5 F1 02 60 8C 9E EB AC<b> 0C 00 00 00</b> </span>50 00 00 00<br />
+<br />
+The last 4 bytes for each column entry appears to be the width of each column but I don't know what sort of format that interprets to.<br />
+<div>
+<br /></div>
+<b><br /></b>
+<b>2. What is the default view if they don't change anything?</b><br />
+<br />
+Your default view for all folders can be found at the following path:<br />
+<br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell\{5C4F28B5-F869-4E84-8E60-F11DB97C5CC7}</span>
+<br />
+<div>
+<br /></div>
+<div>
+Default for me looks like this when a new shellbag is added:<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkw9EnWC3C7yDgk0k9axJ6DGa_BDautXXUsHAw9cFbEDuiUy9_plrTmg-jGCwq7kGgoYnh_xNm4PxLdi_6JzucztBcfanMdC9r3khbqQbM_Th-lK-ERgEjq65ecHMkhJ3Aqz02j3dkopk/s1600/defaults.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="499" data-original-width="582" height="341" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkw9EnWC3C7yDgk0k9axJ6DGa_BDautXXUsHAw9cFbEDuiUy9_plrTmg-jGCwq7kGgoYnh_xNm4PxLdi_6JzucztBcfanMdC9r3khbqQbM_Th-lK-ERgEjq65ecHMkhJ3Aqz02j3dkopk/s400/defaults.png" width="400" /></a></div>
+<br />
+This breaks down to Details view, sorting on Name ascending, 4 columns, and no grouping.</div>
+<div style="text-align: center;">
+<br /></div>
+<div style="text-align: left;">
+<b>3. If a user attempts to access the system volume information directory and a shellbag entry gets created (it should deny them access) what directory viewing settings are left behind?</b><br />
+<b><br /></b>
+A shellbag entry does indeed get created for the folder as you can see from the output:<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhg_OepPS6sseNtuLneXVnCQQ_HybJ2zNN3YkNJQ5HHd7dYVaV4yepR-QRpaeL5WYW6yZAkJfqQe-Ihi3lPuobqC3ktBCB1bHWFFifjeGBxBs53i8CeahRUEpWKEjfxs0xaSizz7Novf9U/s1600/Shell45-1.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="66" data-original-width="669" height="38" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhg_OepPS6sseNtuLneXVnCQQ_HybJ2zNN3YkNJQ5HHd7dYVaV4yepR-QRpaeL5WYW6yZAkJfqQe-Ihi3lPuobqC3ktBCB1bHWFFifjeGBxBs53i8CeahRUEpWKEjfxs0xaSizz7Novf9U/s400/Shell45-1.PNG" width="400" /></a></div>
+<br />
+But when looking in RegistryExplorer at the key entry, you only get the following information:<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEij0uqSLuFrL88c_znXpqYUIkIyA2mzoKCtjw2-LGIXQbPgVbFKmU-fdN5mKaoFq3yV7gh_tHN80BAJmeT5Zli7zF6q2ucoAkMzJRvndawpt8kGsqqkhqxv_3exifY0JDgV2pUcaUW2RAg/s1600/Shell45.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="172" data-original-width="510" height="133" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEij0uqSLuFrL88c_znXpqYUIkIyA2mzoKCtjw2-LGIXQbPgVbFKmU-fdN5mKaoFq3yV7gh_tHN80BAJmeT5Zli7zF6q2ucoAkMzJRvndawpt8kGsqqkhqxv_3exifY0JDgV2pUcaUW2RAg/s400/Shell45.PNG" width="400" /></a></div>
+<div class="" style="clear: both; text-align: left;">
+Some more info on the KnownFolderDerivedFolderType and SniffedFolderType settings <a href="https://www.sans.org/reading-room/whitepapers/forensics/windows-shellbag-forensics-in-depth-34545">here</a>&nbsp;in section 3.2.2.14.<br />
+<br />
+It's amazing that this much information can be pulled out of a few simple values in the registry. While the information is not super significant, if it can help with a case then anything is better than nothing. It just goes to show that there is always more to learn about the Windows operating system.</div>
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://vignette.wikia.nocookie.net/marveldatabase/images/f/fd/Iron_Man's_Briefcase.jpg/revision/latest?cb=20080921014555" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="373" data-original-width="492" src="https://vignette.wikia.nocookie.net/marveldatabase/images/f/fd/Iron_Man's_Briefcase.jpg/revision/latest?cb=20080921014555" /></a></div>

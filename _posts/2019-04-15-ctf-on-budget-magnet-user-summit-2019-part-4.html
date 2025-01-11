@@ -1,0 +1,120 @@
+---
+layout: post
+title: CTF on a Budget - Magnet User Summit 2019 (Part 4) - Secret Project
+date: '2019-04-15T20:37:00.001-04:00'
+author: Kevin Pagano
+tags:
+- CTF
+- Magnet User Summit
+modified_time: '2020-09-11T09:32:59.732-04:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKOU3HkynIdYeNCUQjgMHg9LyaZx6feDE3HlF4Ug2Q03y-aygTqVQwFb78GtY2RI3Te4YMqD5NTwaHoFheu_q_H9zO70U6v3QB6zuxAQfq3gQ8N7MDBiEd2OHdPtpoqMrWUWrjvvBn66I/s72-c/Capture.PNG
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-6453612753345295281
+blogger_orig_url: https://www.stark4n6.com/2019/04/ctf-on-budget-magnet-user-summit-2019-part-4.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKOU3HkynIdYeNCUQjgMHg9LyaZx6feDE3HlF4Ug2Q03y-aygTqVQwFb78GtY2RI3Te4YMqD5NTwaHoFheu_q_H9zO70U6v3QB6zuxAQfq3gQ8N7MDBiEd2OHdPtpoqMrWUWrjvvBn66I/s1600/Capture.PNG" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="297" data-original-width="539" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKOU3HkynIdYeNCUQjgMHg9LyaZx6feDE3HlF4Ug2Q03y-aygTqVQwFb78GtY2RI3Te4YMqD5NTwaHoFheu_q_H9zO70U6v3QB6zuxAQfq3gQ8N7MDBiEd2OHdPtpoqMrWUWrjvvBn66I/s1600/Capture.PNG" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+<a href="https://www.stark4n6.com/2019/04/ctf-on-budget-magnet-user-summit-2019.html">Part 1 - Desktop</a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<a href="https://www.stark4n6.com/2019/04/ctf-on-budget-magnet-user-summit-2019_9.html">Part 2 - Mobile</a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<a href="https://www.stark4n6.com/2019/04/ctf-on-budget-magnet-user-summit-2019-part3.html">Part 3 - Activity</a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+I was planning on having this out last week but vacation got in the way (<a href="https://twitter.com/KevinPagano3/status/1116048956499402753">no complaints though</a>). For part 4, we will walk through the Secret Project.</div><div class="separator" style="clear: both; text-align: left;"><br /></div><span><a name='more'></a></span><div class="separator" style="clear: both; text-align: left;"><br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+When I originally got the disk image prior to the start of the live CTF, I quickly came across the "EvenMoreSecretStuff.vhd" file. I was even to a point of wanting to try and crack the password as I couldn't find anything but gave up until playing. Little did I know completing the Mobile section would eventually reveal the Bitlocker password for the file, "protectedbyjubjub".</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+So once I had the password, I knew exactly what it was for and how to move forward during competition. After unlocking and loading the VHD into FTK Imager, I could see that there was some files in the recycle bin in the "software" folder.</div>
+<div class="separator" style="clear: both; text-align: center;">
+<span id="docs-internal-guid-7814ae82-7fff-434a-51aa-9f01491de070"><span style="font-family: Arial; font-size: 12pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"></span></span><span id="docs-internal-guid-7814ae82-7fff-434a-51aa-9f01491de070"><span style="font-family: Arial; font-size: 12pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"></span></span><span id="docs-internal-guid-583fbb0c-7fff-92d8-7f48-ddb21cd271fb"><span style="font-family: Arial; font-size: 12pt; font-variant-east-asian: normal; font-variant-numeric: normal; vertical-align: baseline; white-space: pre-wrap;"><img height="237" src="https://lh5.googleusercontent.com/BYOyG9ajxE7snr5twEW0bL4DQXZaPZkVvlloU7hnlu1ykMSf-JXseU6_dIpEQH77fokJxHRWQCwd0OdmbrYkYUZRh_odaFo1mwrz7L9OOk2jvzaSEvhuWLSF4qyUv-X7BXAlXywk" style="border: none; transform: rotate(0rad);" width="624" /></span></span></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+<span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-style: normal; font-variant: normal; font-weight: 700; text-decoration: underline; vertical-align: baseline; white-space: pre-wrap;"><span style="font-size: large;">SECRET PROJECT</span></span></div>
+<div dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+<span style="background-color: transparent; color: black; font-family: &quot;arial&quot;; font-size: 12pt; font-style: normal; font-variant: normal; font-weight: 700; text-decoration: underline; vertical-align: baseline; white-space: pre;"><br /></span></div>
+<b><span style="font-size: large;">1. Which language was used to create the secret projects executable?</span></b><br />
+When I originally played, I made a stab at this one quickly, assuming it was <span style="background-color: yellow;">Python</span> because of the icon for the “exe” file, which ended up being the answer.<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/W_Iv3dS_CpD4OAjrz4qXko8fpFXBB8_vWWOX8wN1gRcfnp1jOjKxqYX-qwJyxY6VqpYhM6C2reZhdq3eKlwaHaG9gxPAWdpNurjDRCeJl-w_UjBmtZHVpxKFmAX0MY-6o4FnrPQI" /></div>
+<b><span style="font-size: large;">2. Which Version - Which version of Python is used for the compiled binary? (format: N.N)</span></b><br />
+If confirmation was needed for Q1, we can load “at-5000.exe” into PPEE (puppy), and filter strings for python, showing that “python27.dll” was loading into the executable, answering this one was well, v<span style="background-color: yellow;">2.7</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/QWnE36t4eFBBYw5NAbGs0OwBxGkY0oazyLTH-o4rjCyANsG-_7MSfxdOQvKUeEy5Uy5I-r1CRDTadiKbR9R2lekjNOYg4xzTk9Q84nbrlRpPx9RbAGu92ZFhsO-4B_UdJD-X9wHm" /></div>
+<br />
+<b><span style="font-size: large;">3. Which Compiler Tool - Which tool was used to create the compiled executable?</span></b><br />
+Running some quick string searches in <a href="https://www.mzrst.com/">PPEE</a> for each option, the only one that showed up was <span style="background-color: yellow;">PyInstaller</span>, which was indeed the answer.<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/8Sm7PLpZURpG4khpoV1eNHW8jX3bvra0dWOettf3E-owHzz0EVTsUf26_Zfd0UCd1xM_y4ysPxEHRxgvpUINjpYyM7KjtEMKJp2XpwFpasvnCJirOo3ptDS-dh-AI7Sy-L_ueWpe" /></div>
+<br />
+<b><span style="font-size: large;">4. Processor Architecture - What is the Processor Architecture of the compiled binary?</span></b><br />
+A quick run through of the executable in <a href="https://www.sno.phy.queensu.ca/~phil/exiftool/">exiftool</a> and we can see the architecture was <span style="background-color: yellow;">AMD64</span>.<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/YIZWoy8_M0bo7Vk4uLst6LvKia_c--8ShDlLdKuOlgjiqriduqN4DlMKOQSpNp5h_mlLCFYc3M1fAh0_s54qGUXvrMoUADKM0wGLxf7GlJeoi7YLzgvN7dSlF8yOK2zwbFDyTru1" /></div>
+<br />
+This was also confirmed through PPEE.<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/45mhLlbtusnh5t6VCRBva557MIVXTvVm4em6V1jkSyPFZsry7dl492YTAlD8og-U_UN0jszWsXW--JuszghftTVwZ3fiPJs1riTmzBoVWeovW0jQHkDvkk_hBKa5th381277d9-5" /></div>
+<br />
+<b><span style="font-size: large;">5. Redial - What number does the at-5000 redial?</span></b><br />
+As silly as it was at the time, I originally executed the file and let it running to see what it would do. It eventually stops calling and redials <span style="background-color: yellow;">555-8904</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/sKgxZWDXNWT3WgHMm-fEOILuSuid0WmfLUW1VMILwPkRC-9QozVUJT-zOyYr0WAzHrrDVsYGVsm7PQRhaN9zb82yDedy2fS6U5_TnL1tMZ7nZFo2G7Dn1ZLKkWgwe50xV6WLFQLy" /></div>
+<div>
+<br /></div>
+<b><span style="font-size: large;">6. Redialed Association - Who is associated with the number that gets redialed?</span></b><br />
+With some OSINT and Google we can look up the number 555-8904 and low and behold, someone associated every Simpsons phone number each a character. We can find <a href="https://simpsons.fandom.com/wiki/Telephone_numbers_in_The_Simpsons">here</a> that it belongs to <span style="background-color: yellow;">Ned Flanders</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/8sO0K35UMCY45k7bqMxW36zzLk35i2-CBkbcikA-5rXRh2SWj4Z_g4LyBqqmTFPwgzuou78nFHx_gj76YVUJIvf9Yj60JoVvmFq2t8916i0xCdTs4BkPUW60eDJJjxnAg247UVwQ" /></div>
+<br />
+Now going back through the question with some extra time to research, doing some quick Google searching I found some scripts to unpack and decompile the executable. We first unpack using Countercept’s <a href="https://github.com/countercept/python-exe-unpacker">python-exe-unpacker</a>. I had next searched for a decompiler and came across this article from <a href="https://hshrzd.wordpress.com/2018/01/26/solving-a-pyinstaller-compiled-crackme/">hasherezade</a>. Using her instructions (as I’ve never really done much malware analysis) it’s easy to add the magic number (8 bytes) to the front of the “at-5000” file that was part of the extraction.<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/8J-GoIBZ1q8FwGEKq74chbzw0iEl6LKDdWSb30AbroqL3iToEAIb1a7gR1snGi4w_3JcpvLRwSSOihteqvx_f5lIzcAdOZNU1Qv_Kx8Tz94MDDuFWCNA4Vb4ayKJck-UIQNQTnuV" /></div>
+<br />
+We then add the file extension “pyc” and run through EasyPythonDecompiler to get the code for the python script. We see that it indeed runs until it gets to Ned’s number.<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/3N_tuJ-_5wsoYx5fDyRRsI0_vq1AHJFRDXAKBX0iUfqG7eW9tjUO2ax69l2n4qCV211N7BAdABsXLMlhlaZzpk02Yo_Brs24t6GKeBaG3rQzxXD_Qk9QGYKstk4mgoMr2vbljVIN" /></div>
+<br />
+We can use this code to pull out the information we want for the rest of the questions.<br />
+<br />
+<b><span style="font-size: large;">7. Call Time - How much time (in seconds) does the AT-5000 wait between dialing numbers?</span></b><br />
+<br />
+<div>
+Originally, I completely guess this one correctly, because I knew after executing the numbers incremented more quickly than 1 per second. Now, viewing the source code, we see it was <span style="background-color: yellow;">0.01</span> seconds.<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/COPhVYF7SuTdDXjSf76Vwv5SpzI0fu1fEB886srNLqWZBEL0gJAkXpcnOEIY_XPHLgNsNZKcdyee2zWLqsJzy3ak2dBhX9zww3OUIeTF-TUCqOOlkghZ2rDJuKYnb5nocWI3qhqM" /></div>
+<br />
+<b><span style="font-size: large;">8. Imports - What two libraries does at-5000 import?</span></b><br />
+Easy, look at the top of the source code and see <span style="background-color: yellow;">time </span>and <span style="background-color: yellow;">random</span>.<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/P70NO4IFSzJIcfZtIAXEJi-WaA3bjt_SUGdfYDH-weMpOa7L-Uh4jWJOU5kW2qAtpLnPkoE79YB4RfN3VzFWn4i6SLPP2qzLzVWqoklqErPT8QRDmRPvzRJPugbRD186daYcZ_f0" /></div>
+<br />
+<b><span style="font-size: large;">9. Max Calling - What is the max number of calls the AT-5000 can make?</span></b><br />
+Another easy one now we have the code, you can see it increments in a range up to <span style="background-color: yellow;">10000000</span>.<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/8bp1yrLmhtk6Zt1PrESOG6rT71uu9OCSD_nmM87q5sN4RgLVge7eUgdNhYWrv5zV5Z0dP9YO4CPw3rRgrt4ERxtLygT3L8_TpGWtYnrIVTfQ-DVF5MLeCzLyo_8hIXFLxBnd9uYh" /></div>
+<div style="text-align: center;">
+<br /></div>
+<div style="text-align: left;">
+<br /></div>
+<div style="text-align: left;">
+And with that final question, it completes the Magnet User Summit 2019 CTF with 316 points!</div>
+<div style="text-align: left;">
+<br /></div>
+<div style="text-align: center;">
+<span id="docs-internal-guid-d117c3f5-7fff-f94b-3e53-a0761184961c"><span style="font-family: &quot;arial&quot;; font-size: 12pt; font-weight: 700; vertical-align: baseline; white-space: pre-wrap;"><img height="64" src="https://lh6.googleusercontent.com/qm3KxKvy-P_jcuHq5zEnTNMNKuqHEVSzWlsohYdWJ7Pdx2LUxJpcEsnh4EDF1KUK1HbSs6OP0gzOeu479IghQSs969ykj0MdtonqHbIQLUvkprVnor7zhN5pKu-KJCModtMJUkGZ" style="border: none; transform: rotate(0rad);" width="520" /></span></span></div>
+<div>
+<span style="background-color: white; color: #212529; font-family: &quot;arial&quot;; font-size: 12pt; font-style: normal; font-variant: normal; font-weight: 700; text-decoration: none; vertical-align: baseline; white-space: pre;"><br /></span></div>
+Doing the CTF live was an amazing experience, especially to win 1st place. The second go around was just as invigorating as I got to learn so much more than I did before, specifically around network sessions, and as well as decompiling code.<br />
+<br />
+I'm already looking forward to next years summit and any future CTF's Dave, Matt, and Jessica put on.</div>

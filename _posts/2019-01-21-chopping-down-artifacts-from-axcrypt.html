@@ -1,0 +1,71 @@
+---
+layout: post
+title: Chopping Down Artifacts from AxCrypt
+date: '2019-01-21T21:12:00.000-05:00'
+author: Kevin Pagano
+tags:
+- AxCrypt
+modified_time: '2019-01-21T21:12:04.297-05:00'
+thumbnail: https://i.ytimg.com/vi/jyixJ03qmkg/default.jpg
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-2694146454600798093
+blogger_orig_url: https://www.stark4n6.com/2019/01/chopping-down-artifacts-from-axcrypt.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://i.ytimg.com/vi/jyixJ03qmkg/maxresdefault.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><span style="color: black;"><img border="0" data-original-height="450" data-original-width="800" height="225" src="https://i.ytimg.com/vi/jyixJ03qmkg/maxresdefault.jpg" width="400" /></span></a></div>
+<a href="https://www.axcrypt.net/information/get-started/">AxCrypt</a> is a tool that I recently came across that can encrypt your files on the go and quickly. As a company, they have been around since 2002 but their 2.0 product was released just in 2016. It has won multiple awards as their <a href="https://www.axcrypt.net/awards-reviews/">site shows</a>.<br />
+<br />
+There are two versions that you can download, an EXE installer version and a portable version. Before being able to use AxCrypt, you have to set up an account with an email address and a master password that will be used to encrypt/decrypt everything.<br />
+<br />
+The interface is pretty simple, you add files to the tool and it automatically encrypts the file using AES-128 or AES-256 (depending on your license).<br />
+<br />
+<b><span style="font-size: large;">User/Install Information</span></b><br />
+<br />
+In the AppData folder for the user that it was installed/run on, 4 text documents are present:<br />
+<br />
+<div style="text-align: center;">
+<span style="font-family: Courier New, Courier, monospace;">C:\Users\<b>&lt;USERNAME&gt;</b>\AppData\Local\AxCrypt\</span></div>
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAPVn-qEWTE5K7HrdM4VW1z2r9QOM7t8nkoTDZSbQvhwIBUTFmalSPNA-TkZLuBXOIk0K6DfTjOX6_nYITQ1g_57jsiXigQzrZ6WhyphenhyphenJwIySLsSt4bInIByw9PwHP7Zwm04tf7ep9_Z9Hc/s1600/Text.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="131" data-original-width="186" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAPVn-qEWTE5K7HrdM4VW1z2r9QOM7t8nkoTDZSbQvhwIBUTFmalSPNA-TkZLuBXOIk0K6DfTjOX6_nYITQ1g_57jsiXigQzrZ6WhyphenhyphenJwIySLsSt4bInIByw9PwHP7Zwm04tf7ep9_Z9Hc/s1600/Text.PNG" /></a></div>
+<b>FileSytemState </b>- Includes "watchedFolders", folders setup to auto encrypt, "activeFiles" which appears to be recent files, including "decryptedFolder" paths, decrypted file names, encrypted file paths, as well as last activity times and last encryption write times<br />
+<br />
+<b>UserAccounts </b>- Displays information regarding the email address associated with the product, the account "level" type or license type, expiration date for the account, and public and private key information<br />
+<br />
+<b>UserPublicKeys</b> - Shows the email address as well as the public key associated with it (I'm assuming if you import more keys they would show here as their is a flag for "user_imported")<br />
+<br />
+<b>UserSettings</b> - Details settings for the actual application (version #, update URL, window height/width, last update check date/time)<br />
+<br />
+<b><span style="font-size: large;">Renames and LNKs</span></b><br />
+<br />
+Looking at the USN journal you see that once a file gets loaded into the tool for encryption, it gets renamed adding a dash (-) and the extension to the file name then gets a .tmp extension before its final extension .axx.<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxDuLycg4KCuq3dlKGM65kUft5XuRYNCt6TzKvGhVMe1NAMq2dLFVSyrG-ySn5rg-VhwEs7k_AXOYaEodGhkcu0kS3q0yQ72tRIT9BTIn-jSrqqMCZJ0UqJVQNnV_vLV8rZx_PxTqqJ5o/s1600/Rename.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="95" data-original-width="577" height="104" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxDuLycg4KCuq3dlKGM65kUft5XuRYNCt6TzKvGhVMe1NAMq2dLFVSyrG-ySn5rg-VhwEs7k_AXOYaEodGhkcu0kS3q0yQ72tRIT9BTIn-jSrqqMCZJ0UqJVQNnV_vLV8rZx_PxTqqJ5o/s640/Rename.PNG" width="640" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<br />
+There is also an option in the tool that will rename the file itself to what they call "Anonymous Rename" which will change the current file name to a 10 digit numeric name, keeping the .axx extension, a more practical option if you are trying to conceal any possible context of the contents.<br />
+<br />
+When decrypting a file they are loaded into a temporary folder at:<br />
+<br />
+<div style="text-align: center;">
+<span style="font-family: Courier New, Courier, monospace;">C:\Users\<b>&lt;USERNAME&gt;</b>\AppData\Local\AxCrypt\<b>&lt;RANDOM_FOLDER&gt;</b></span></div>
+<b><br /></b>
+The naming convention for the folder appears to be 8 character lowercase alphanumeric. It gets noted in the FileSystemState.txt file from above. This could be helpful to know if you come across a system that has AxCrypt running and has files open where you can locate the decrypted original files.<br />
+<br />
+Preliminary testing:<br />
+<br />
+<ol>
+<li>&nbsp;A new file "NewTest.txt" was created with some content</li>
+<li>File dragged into AxCrypt portable, file name gets changed to "NewTest-txt.axx" and encrypted</li>
+<li>"NewTest-txt.axx" is opened and view, created a LNK file</li>
+<li>Anonymous Rename option selected and file added, "NewTest-txt.axx" gets renamed to "2028781783.axx" on the desktop.</li>
+<li>When opening "2028781783.axx", a LNK is created with the same name</li>
+</ol>
+<br />
+When looking at both LNK's, the file sizes are the same as well as the Object-ID's, possibly deducing that these are/were the same file.<br />
+<br />
+Another item to look for is execution after opening an .axx file. Since they are regular files such as a TXT or a PNG, it will natively open the file in something that can read it. For instance, after opening "2028781783.axx" it runs Notepad, helping narrow down what file type it originally is.<br />
+<br />
+AxCrypt does a pretty good job in concealing originally names, if you choose the Anonymous Rename option and naturally it encrypts well with AES. I hope to look at what else I can dig up in a future post.

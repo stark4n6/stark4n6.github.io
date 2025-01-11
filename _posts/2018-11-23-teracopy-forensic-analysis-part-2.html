@@ -1,0 +1,150 @@
+---
+layout: post
+title: 'TeraCopy: A Forensic Analysis (Part 2)'
+date: '2018-11-23T14:33:00.002-05:00'
+author: Kevin Pagano
+tags:
+- TeraCopy
+modified_time: '2019-01-21T19:34:11.649-05:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgya0OBAO1CHzasO_6XKpCko1KSZ-I0piJteg6t3ra4Hm5Er-V2snIYUDTvHWifP5PQshoSW9Fm7eKBLAwa2qiCp9sLOcchNi_D8YBrn9vSclwvXA7m7UAEVwOtErhOqjyZZ4nK5VxnJ0o/s72-c/teracopy.jpg
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-9209055922437463926
+blogger_orig_url: https://www.stark4n6.com/2018/11/teracopy-forensic-analysis-part-2.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgya0OBAO1CHzasO_6XKpCko1KSZ-I0piJteg6t3ra4Hm5Er-V2snIYUDTvHWifP5PQshoSW9Fm7eKBLAwa2qiCp9sLOcchNi_D8YBrn9vSclwvXA7m7UAEVwOtErhOqjyZZ4nK5VxnJ0o/s1600/teracopy.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="203" data-original-width="360" height="180" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgya0OBAO1CHzasO_6XKpCko1KSZ-I0piJteg6t3ra4Hm5Er-V2snIYUDTvHWifP5PQshoSW9Fm7eKBLAwa2qiCp9sLOcchNi_D8YBrn9vSclwvXA7m7UAEVwOtErhOqjyZZ4nK5VxnJ0o/s320/teracopy.jpg" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+In the <a href="https://www.stark4n6.com/2018/11/teracopy-forensic-analysis-part-1.html">part one</a> we went over the details found in the "main.db" file for TeraCopy. Here we will review what the History folder looks like. It can be found in here:</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<span style="font-family: Courier New, Courier, monospace;">C:\Users\<b>&lt;USERNAME&gt;</b>\AppData\Roaming\Teracopy\History</span></div>
+<div class="separator" style="clear: both; text-align: center;">
+<b><br /></b></div>
+<div class="separator" style="clear: both; text-align: left;">
+Each individual job that was run will get it's own History DB file. The naming convention as previously shown&nbsp;</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+The DB file contains 15 columns as shown below:</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCJhQKpqCCD4fyT6JjmcUmTXBigZW1GmTIuADitriMdtjZxCUFh8z1A49dpn8mhMXolaHEMJ8SYWWvQZYPCMBQjY74bZEuq56GdLoWR_aHoxDWbY2oPpdNNEQnW1KCjHVKd8o5RxXiM8c/s1600/history.JPG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="274" data-original-width="166" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCJhQKpqCCD4fyT6JjmcUmTXBigZW1GmTIuADitriMdtjZxCUFh8z1A49dpn8mhMXolaHEMJ8SYWWvQZYPCMBQjY74bZEuq56GdLoWR_aHoxDWbY2oPpdNNEQnW1KCjHVKd8o5RxXiM8c/s1600/history.JPG" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Source </b>- File/Folder name source</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Offset </b>-&nbsp;Start index position of the file/folder name from the source folder location</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>State </b>- The state of the operation per file/folder&nbsp;</div>
+<div class="separator" style="clear: both; text-align: left;">
+0 - Added</div>
+<div class="separator" style="clear: both; text-align: left;">
+1 - OK</div>
+<div class="separator" style="clear: both; text-align: left;">
+2 - Verified</div>
+<div class="separator" style="clear: both; text-align: left;">
+3 - Error</div>
+<div class="separator" style="clear: both; text-align: left;">
+4 - Skipped</div>
+<div class="separator" style="clear: both; text-align: left;">
+5 - Deleted</div>
+<div class="separator" style="clear: both; text-align: left;">
+6 - Moved</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Size </b>- Size of the file in bytes</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Attributes </b>-&nbsp;properties of the individual files (<a href="http://www.4guysfromrolla.com/webtech/112600-1.shtml">source</a>)</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjroEDlWkB4i7i1imf3nVkoE2yr-2ZJxWuwdLEH33zZUUtNy-QuVBsWyrivgz52TnZfJuasVIBHfVzoukUFoX7nbn9QZI1BAe9cCfOI8h2LjoNbk5AKLCVHEZM1IySyYVzwYOPwrun9J_s/s1600/attributes.JPG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="363" data-original-width="691" height="336" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjroEDlWkB4i7i1imf3nVkoE2yr-2ZJxWuwdLEH33zZUUtNy-QuVBsWyrivgz52TnZfJuasVIBHfVzoukUFoX7nbn9QZI1BAe9cCfOI8h2LjoNbk5AKLCVHEZM1IySyYVzwYOPwrun9J_s/s640/attributes.JPG" width="640" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>IsFolder </b>- self explanatory</div>
+<div class="separator" style="clear: both; text-align: left;">
+0 - No</div>
+<div class="separator" style="clear: both; text-align: left;">
+1 - Yes</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Creation, Access, Write </b>-&nbsp;Shows the created, access, and modified dates of the file/folder in <a href="https://ssd.jpl.nasa.gov/tc.cgi">Julian format</a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>SourceCRC </b>-&nbsp;Hash of the file (MD5 by default)</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>TargetCRC </b>-&nbsp;Verification hash post operation completion (not on by default)</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>TargetName </b>-&nbsp;New name of the file if you copy/move and it is a duplicate</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<b>Message </b>- For displaying errors or target issues<br />
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Marked </b>- TBD</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Hidden </b>-&nbsp;Added to the operation but removed before/during ("Right click &gt; Remove selected" from File List</div>
+<div class="separator" style="clear: both; text-align: left;">
+0 - No</div>
+<div class="separator" style="clear: both; text-align: left;">
+1 - Yes</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+One caveat for these logs is that in the interface for TeraCopy you can change the retention to 3 different options:</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+Never Keep History</div>
+<div class="separator" style="clear: both; text-align: left;">
+Keep History for 1 day</div>
+<div class="separator" style="clear: both; text-align: left;">
+Keep History for 1 week (default)</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzTZnRc9FEi7FMC_F9eIrEvYMSf-soNbaZZ8ZJMaROZFTLfbPay_NrUJugFUFdEbYv7g6vYZqYKm9cdb5iwA5RmQSq0HxWEFg5RjeybktWUAlxIa96ckppRIA0mshyphenhyphen-VNUDeE9WUxLyO4/s1600/teracopyhistory.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="423" data-original-width="693" height="390" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzTZnRc9FEi7FMC_F9eIrEvYMSf-soNbaZZ8ZJMaROZFTLfbPay_NrUJugFUFdEbYv7g6vYZqYKm9cdb5iwA5RmQSq0HxWEFg5RjeybktWUAlxIa96ckppRIA0mshyphenhyphen-VNUDeE9WUxLyO4/s640/teracopyhistory.png" width="640" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+Though these options are hidden under a menu, it is easily configurable with some technical knowledge.</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+While TeraCopy might not be widely used, it is a huge benefit from a forensic perspective if you happen to stumble upon it in an investigation and have access to the logs.</div>
+<div class="separator" style="clear: both; text-align: left;">
+<b><br /></b></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b>UPDATE 12/3/2018:</b> <a href="https://www.stark4n6.com/2018/12/teracopy-forensic-analysis-part-3.html">Part 3 is live</a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<b><br /></b></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b><br /></b></div>

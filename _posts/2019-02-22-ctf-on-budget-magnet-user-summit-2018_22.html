@@ -1,0 +1,74 @@
+---
+layout: post
+title: CTF on a Budget - Magnet User Summit 2018 (Part 3)
+date: '2019-02-22T00:30:00.000-05:00'
+author: Kevin Pagano
+tags:
+- CTF
+- Magnet User Summit
+modified_time: '2019-02-22T00:30:00.288-05:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2JdrxQFtYk1ar07aQ-AHFr202saeLXVmTQ_SbGP9p0t1WibgirmAoyuW2IjqDX-9qDddp6_qRXyyBPJXNCnQYhSX824s0fAfkxQNLGimqMMnO5rmnRuzakpK3oOKsvq_wK_MX_WKa9eo/s72-c/Dropbox.PNG
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-5686573743225850352
+blogger_orig_url: https://www.stark4n6.com/2019/02/ctf-on-budget-magnet-user-summit-2018_22.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://www.magnetforensics.com/wp-content/uploads/2018/03/CTF_callout.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="445" data-original-width="445" height="320" src="https://www.magnetforensics.com/wp-content/uploads/2018/03/CTF_callout.png" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+For part 3, we are looking at the exfiltration section.</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+Previously: <a href="https://www.stark4n6.com/2019/02/ctf-review-magnet-user-summit-2018-part.html">Part 1 (Misc)</a>&nbsp;| <a href="https://www.stark4n6.com/2019/02/ctf-on-budget-magnet-user-summit-2018.html">Part 2 (Anti-Forensics)</a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b><u><span style="font-size: large;">Exfiltration</span></u></b></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b><u><span style="font-size: large;"><br /></span></u></b></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b>1. Application for Exfil:&nbsp;</b>Which application was used to exfiltrate data on the compromised system?&nbsp;</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+My first thought was to see what was installed so I took a peek in Program Files and Program Files (x86) as well as what the SOFTWARE registry file had. There was nothing of interest there so I decided to parse shellbags with SBECmd for each user and in doing so I came across Dropbox under "itsupport". This lead to finding the installer for Dropbox on the desktop as well.</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2JdrxQFtYk1ar07aQ-AHFr202saeLXVmTQ_SbGP9p0t1WibgirmAoyuW2IjqDX-9qDddp6_qRXyyBPJXNCnQYhSX824s0fAfkxQNLGimqMMnO5rmnRuzakpK3oOKsvq_wK_MX_WKa9eo/s1600/Dropbox.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="109" data-original-width="770" height="90" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2JdrxQFtYk1ar07aQ-AHFr202saeLXVmTQ_SbGP9p0t1WibgirmAoyuW2IjqDX-9qDddp6_qRXyyBPJXNCnQYhSX824s0fAfkxQNLGimqMMnO5rmnRuzakpK3oOKsvq_wK_MX_WKa9eo/s640/Dropbox.PNG" width="640" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<b>2. Browser to Download Dropbox:</b>&nbsp;Which browser was used to download the application that exfiltrated the data?<br />
+<br />
+From previous questions, we knew Edge was a possibility. Google Chrome and Mozilla Firefox were also shown to be installed on the system. In parsing internet history for them all using BrowserHistoryView we don't see anything relevant to Dropbox. Something that did catch my eye in the Firefox history was a download for Maxthon mx5, a lesser known browser (which I only learned about during this CTF).<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9zJIBg9BfCq4ayGgKOghvi13UEQbsVZhyt8f_xnqZh2z6kp4GK3wYLwMKjGheXKiCk8C8ZEPOk88dxHoJCeLcIzkXg0q5n9VdVlCe5F1wWDm8qFOasKc6r4Hw6fYoir0FJY_Z2U9vp6E/s1600/maxthon.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="201" data-original-width="1436" height="88" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9zJIBg9BfCq4ayGgKOghvi13UEQbsVZhyt8f_xnqZh2z6kp4GK3wYLwMKjGheXKiCk8C8ZEPOk88dxHoJCeLcIzkXg0q5n9VdVlCe5F1wWDm8qFOasKc6r4Hw6fYoir0FJY_Z2U9vp6E/s640/maxthon.PNG" width="640" /></a></div>
+<br />
+Digging through the folder structure from AppData we come across a task file:<br />
+<br />
+<table>
+      <tbody>
+<tr>
+        <td><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">
+          /img_MaxPowersCDrive.E01/vol_vol2/Users/itsupport/AppData/Roaming/<br />Maxthon5/Public/Downloader/TaskList/{6F3E1C74-4C0A-4747-8B21-27D988BF985E}.tsk
+        </span></td>
+      </tr>
+</tbody></table>
+<br />
+In plain text we can see the download information for Dropbox including the download location, the executable name, and the URL path it came from:<br />
+<br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">DropboxInstaller.exe</span><br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">C:\Users\itsupport\Desktop\</span><br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">DropboxInstaller.exe.mxdl</span><br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">https://dl-web.dropbox.com/installer?authenticode_sign=True&amp;build_no=48.4.58&amp;juno=True&amp;juno_use_program_files=True&amp;plat=win&amp;tag=eyJUQUdTIjoiZUp5clZpcE9MUzdPek0tTHoweFJzbEl3dERBek1UY3p0VEEzc3pReXRqUzJ0RFF3c2pRRGNZek1MUXdzakN3TVRNMU5ETTBOYWdHdGN3M2hATUVUQSJ9&amp;tag_token=AJ9qI4bmJ6CdwFIewmUY0_fl2HIFYQfIIw_-ka-83etQ7A</span><br />
+<br />
+<b>3. Data Exfiltrated:&nbsp;</b>How much data was sent out via the application exfiltrating the data? [answer in bytes]<br />
+<br />
+Going back to our SRUM output we grabbed for a previous question using srum_dump, we can look at NetworkUsage this time. We can open the CSV into TimelineExplorer, filter on application name and easily see that&nbsp;1363639 bytes were sent.<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqd4CKb_skCsZHVTzq2Y-DdEiNxvT8oY7zJWnlYqZT288DQv95U7tDIiCqcIH3SEIbTBKMcOkxCGO8uHch3i2IZwdmLdD1xj_vCalZLQjeu-inEVI4WNjr8gN-W-eoaJmZ0Hm07HFHv00/s1600/DropboxBytesSent.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="125" data-original-width="1227" height="64" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqd4CKb_skCsZHVTzq2Y-DdEiNxvT8oY7zJWnlYqZT288DQv95U7tDIiCqcIH3SEIbTBKMcOkxCGO8uHch3i2IZwdmLdD1xj_vCalZLQjeu-inEVI4WNjr8gN-W-eoaJmZ0Hm07HFHv00/s640/DropboxBytesSent.PNG" width="640" /></a></div>
+<br />

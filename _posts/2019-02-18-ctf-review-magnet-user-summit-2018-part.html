@@ -1,0 +1,162 @@
+---
+layout: post
+title: CTF on a Budget - Magnet User Summit 2018 (Part 1)
+date: '2019-02-18T16:00:00.000-05:00'
+author: Kevin Pagano
+tags:
+- CTF
+- Magnet User Summit
+modified_time: '2019-02-19T22:03:04.944-05:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXR9VDKbzaHLJlCJ3pWR88xBXqPzFjgnG8wpNcoxa2QXWselFwzHP5wI6MOUCODOimMmfnOnYWvUHkppQClemmCdnvPB4OFPqiTKhDSRfyp_i5m9aTY11lSi5lIMOZ8OXeclnMtEj-ABE/s72-c/Timezone.PNG
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-2547664988477003534
+blogger_orig_url: https://www.stark4n6.com/2019/02/ctf-review-magnet-user-summit-2018-part.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://www.magnetforensics.com/wp-content/uploads/2018/03/CTF_callout.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="445" data-original-width="445" height="320" src="https://www.magnetforensics.com/wp-content/uploads/2018/03/CTF_callout.png" width="320" /></a></div>
+<br />
+<br />
+Last year during the Magnet User Summit, I was able to participate in the <a href="https://magnetctf.ctfd.io/">excellent CTF</a> from Dave and Matt of G-C Partners. I had so much fun and learned a lot from doing it but I wanted to revisit it before it <a href="https://www.hecfblog.com/2019/02/daily-blog-620-magnet-user-summit-2018.html">gets shut down</a> and see if I could answer the questions using only <u>free</u> tools instead of parsing it through AXIOM. The other benefit was to brush up on my knowledge for this year's upcoming challenge.<br />
+<br />
+In this first segment we will take a look at the Miscellaneous category for the CTF.<br />
+<br />
+The first thing I did was use the latest version of KAPE from Eric Zimmerman and fine folks over at Kroll to pull out a bunch of useful files.<br />
+<br />
+<b><u><span style="font-size: large;">Misc</span></u></b><br />
+<br />
+<b>1. Timezone</b>: What is the system's timezone set to?<br />
+<br />
+Using RegistryExplorer, drill down into the SYSTEM registry file and go to:<br />
+<div style="text-align: center;">
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">ControlSet001\Control\TimeZoneInformation\TimeZoneKeyName</span></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXR9VDKbzaHLJlCJ3pWR88xBXqPzFjgnG8wpNcoxa2QXWselFwzHP5wI6MOUCODOimMmfnOnYWvUHkppQClemmCdnvPB4OFPqiTKhDSRfyp_i5m9aTY11lSi5lIMOZ8OXeclnMtEj-ABE/s1600/Timezone.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="75" data-original-width="283" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXR9VDKbzaHLJlCJ3pWR88xBXqPzFjgnG8wpNcoxa2QXWselFwzHP5wI6MOUCODOimMmfnOnYWvUHkppQClemmCdnvPB4OFPqiTKhDSRfyp_i5m9aTY11lSi5lIMOZ8OXeclnMtEj-ABE/s1600/Timezone.PNG" /></a></div>
+<br />
+<div style="text-align: left;">
+Mountain Standard Time is the timezone.</div>
+<br />
+<b>2. File Sequence Number:</b> What is the MFT file sequence number for the Python27\python.exe file? [This is not the MFT entry number]<br />
+<br />
+Parsing the $MFT file with Eric Zimmerman's MFTECmd, and then dropping the output into TimelineExplorer, you can filter on the file name. This shows a sequence number of 1 for python.exe.<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh6AWQ9JnwvJVRmNLKIt44tfGhSQXCcRvPfA50YbuI4hq_BrkoF4ipF6yxZBSlXOXZTeKN7QQq2o6gYOgUhKjd_r148rfshF1Hsbp6MbXz7Pwi9nnoQhf_SKAn7c81LSM-5-2HEdjxTvgY/s1600/PythonSequence.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="139" data-original-width="697" height="78" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh6AWQ9JnwvJVRmNLKIt44tfGhSQXCcRvPfA50YbuI4hq_BrkoF4ipF6yxZBSlXOXZTeKN7QQq2o6gYOgUhKjd_r148rfshF1Hsbp6MbXz7Pwi9nnoQhf_SKAn7c81LSM-5-2HEdjxTvgY/s400/PythonSequence.PNG" width="400" /></a></div>
+<div>
+<br /></div>
+<b>3. FileName Lookup:</b> What is the name of the file that has MFT entry of 86280?<br />
+<br />
+Parsing the $MFT file with Eric Zimmerman's MFTECmd, and then dropping the output into TimelineExplorer, you can filter on Entry Number to show the result, $USNJrnl.<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzj3TzmJbEC0WP1DT-9QkmUzahNvSo6-sGa6ZH1LGp3iEjIiSQbjHO6S29R_e1uhOx4RFDIgRqw1OAv1D7spAv1j3hxmBpZCrZ03bmeOZg93y9Oyzdfu37gjP7VwvatuB9cINzu1sxuEs/s1600/MFT_86280.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="129" data-original-width="370" height="69" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzj3TzmJbEC0WP1DT-9QkmUzahNvSo6-sGa6ZH1LGp3iEjIiSQbjHO6S29R_e1uhOx4RFDIgRqw1OAv1D7spAv1j3hxmBpZCrZ03bmeOZg93y9Oyzdfu37gjP7VwvatuB9cINzu1sxuEs/s200/MFT_86280.PNG" width="200" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b>4. FileTimestamp:</b> What is the Standard Information Attribute's Access timestamp of the Windows\Prefetch\CMD.EXE-89305D47.pf file? [UTC in YYYY-MM-DD hh:mm:ss format]</div>
+<div>
+<br /></div>
+With the MFT still loaded into TimelineExplorer you can filter on
+  the file name and look at the LastAccessed field<br /><ul>
+</ul>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgOSfs1aymB9wXRxvmoZdk7BYCZrP0RluAqPQoOhdSQgC5_YsE0USf1Ae3uPyzZ4e0ikx_0PbSl10QbE1JPUiweRhFJMUyKRLggPA3vcuY_rTSn8g_BcvbjqjJLKJd_-woYT0zRUUwvp0I/s1600/CMD+Last+Accessed.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="130" data-original-width="693" height="60" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgOSfs1aymB9wXRxvmoZdk7BYCZrP0RluAqPQoOhdSQgC5_YsE0USf1Ae3uPyzZ4e0ikx_0PbSl10QbE1JPUiweRhFJMUyKRLggPA3vcuY_rTSn8g_BcvbjqjJLKJd_-woYT0zRUUwvp0I/s320/CMD+Last+Accessed.PNG" width="320" /></a></div>
+So putting the date/time into the requested format you get: 2018-04-26 15:48:40.<br />
+<div>
+<br />
+<div class="" style="clear: both; text-align: left;">
+<b>5. VSN-C:</b> What is the C: volumes' serial number?<br />
+<br />
+You can look at the $Boot file and go to offset hex 0x48-51 (it will be listed in little endian). An easier way to find this is to load the E01 file into FTK Imager, click on the&nbsp; C: volume and look at the Properties</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6w8qpd8dzl2Q36hQ9msdGsbgEWYQ6EO8cBhBSo2SK80M7tjcd8jI1haqh1mz2pxC9ISkUNlwWv_HJdS6yh448ePkHBKJ4QWmsuaFfZJKKZBzwIIzowsd_Df-6b6RzS0jRKCH04IRltOM/s1600/VolumeSerial.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="31" data-original-width="541" height="22" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6w8qpd8dzl2Q36hQ9msdGsbgEWYQ6EO8cBhBSo2SK80M7tjcd8jI1haqh1mz2pxC9ISkUNlwWv_HJdS6yh448ePkHBKJ4QWmsuaFfZJKKZBzwIIzowsd_Df-6b6RzS0jRKCH04IRltOM/s400/VolumeSerial.PNG" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="" style="clear: both; text-align: left;">
+<b>6. YouTube Search:&nbsp;</b>What term was searched in YouTube on 3/28/2018?<br />
+<br />
+After loading the E01 into Autopsy you can parse for Internet history, sorting on date stamp and looking for YouTube. Parsed from the Firefox history:</div>
+<table>
+      <tbody>
+<tr>
+        <td><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">img_MaxPowersCDrive.E01/vol_vol2/Users/maxpowers/AppData/Roaming<br />/Mozilla/Firefox/Profiles/dbwuvf2f.default/places.sqlite
+        </span></td>
+      </tr>
+</tbody></table>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZ15UmJVf2NuBQVvROUnj-aomMeaIRTlC6jmA-oXOfaiZSqN1zYS1TfkINLHY3FLqtauuk0dLXqwdSGwEx2kOGn2E4dU3QMemaIKX4lwHJhU3UKBXuF2sDIUI_bVHpGV3Q6T8y5ytNS1s/s1600/YoutubeSearch.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="30" data-original-width="806" height="20" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZ15UmJVf2NuBQVvROUnj-aomMeaIRTlC6jmA-oXOfaiZSqN1zYS1TfkINLHY3FLqtauuk0dLXqwdSGwEx2kOGn2E4dU3QMemaIKX4lwHJhU3UKBXuF2sDIUI_bVHpGV3Q6T8y5ytNS1s/s640/YoutubeSearch.PNG" width="640" /></a></div>
+<div>
+<br /></div>
+<div>
+The answer is "simpsons max power".<br />
+<br />
+<b>7. Sleuthkit + PowerShell:&nbsp;</b>Max Powers was playing with ways he could extract files using Sleuthkit and PowerShell. What was the exact command he used in attempting to extract the SRUM database?<br />
+<br />
+PowerShell command history can be found at the following link for user Max Powers:<br />
+<br />
+<table>
+      <tbody>
+<tr>
+        <td><span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">img_MaxPowersCDrive.E01/vol_vol2/Users/maxpowers/AppData/Roaming<br />/Microsoft/Windows/PowerShell/PSReadline/ConsoleHost_history.txt
+        </span></td>
+      </tr>
+</tbody></table>
+</div>
+<div>
+<br />
+Searching for SRUM in the text document you see only one line pertaining to it:<br />
+<br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">$inode = ifind -n /Windows/System32/sru/SRUDB.dat \\.\C: ; icat \\.\C: $inode &gt; SRUDB.dat</span><br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><br /></span>
+<b>8. Administrator Logon Count:</b>&nbsp;How many times did Administrator logon to the system?<br />
+<br />
+We first want to pull out the SAM registry file and parse it with RegRipper. We can run the "samparse" plugin to pull out the information we want</div>
+<div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhV6e5qULD-uLJjcRgahMd7AAG2RGADaMANnHNKv8SDmgk8wmlWqdFOjgnQUTObY-NYMQaR7EU_IQJBNdJUMrqcs1CA3EFL7Fis-BsgkOpJc88GqYHxgcDv0pV8D214epmUFuUxEtrCtmM/s1600/AdminLogonCount.JPG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="171" data-original-width="584" height="185" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhV6e5qULD-uLJjcRgahMd7AAG2RGADaMANnHNKv8SDmgk8wmlWqdFOjgnQUTObY-NYMQaR7EU_IQJBNdJUMrqcs1CA3EFL7Fis-BsgkOpJc88GqYHxgcDv0pV8D214epmUFuUxEtrCtmM/s640/AdminLogonCount.JPG" width="640" /></a></div>
+<div>
+<br /></div>
+</div>
+<div>
+You can see that the login count for Administrator was 14.<br />
+<b><br /></b></div>
+<div>
+<b>9. Install Q:</b> What day was the Go programming language installed on? [Answer format: YYYY-MM-DD<br />
+<br />
+Loading the SOFTWARE registry file into RegistryExplorer, a quick search for "Go programming" lists the install entry for the program. The key value InstallDate shows the date the program was installed.</div>
+<div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQB_csZvbD5eVcA-ceod0bZtpwYNLUe-1sJeyQLMvcUDUALSP7dYv2s9XT5TF920uZKrRtsBDdXp1tRNn7c35ckQL8EAKoNpdRDMVY7oH3upt0sDpN9s1wi_u7C8LWU7DWBsVvF1UjxkE/s1600/GoInstallDate.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="26" data-original-width="301" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQB_csZvbD5eVcA-ceod0bZtpwYNLUe-1sJeyQLMvcUDUALSP7dYv2s9XT5TF920uZKrRtsBDdXp1tRNn7c35ckQL8EAKoNpdRDMVY7oH3upt0sDpN9s1wi_u7C8LWU7DWBsVvF1UjxkE/s1600/GoInstallDate.PNG" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+Autopsy also automatically parses it out nicely too</div>
+<div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdV9CPQYSNirtDmm9A1PjH8xRWd4wvUZ-arOpSvKPK3A1GvK9qk-VfP_U4CS9Z-FbzA2xGpvMsXPLVgNrOYk-trbVptoNnSUUcYCc32jiFE-M84a7jXlqocPm_f1B5ZV6AaS4itjI7dJE/s1600/GoInstall.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="27" data-original-width="943" height="16" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdV9CPQYSNirtDmm9A1PjH8xRWd4wvUZ-arOpSvKPK3A1GvK9qk-VfP_U4CS9Z-FbzA2xGpvMsXPLVgNrOYk-trbVptoNnSUUcYCc32jiFE-M84a7jXlqocPm_f1B5ZV6AaS4itjI7dJE/s640/GoInstall.PNG" width="640" /></a></div>
+<div>
+<br /></div>
+</div>
+<div>
+The answer is 2018-04-11.</div>
+</div>
+<div>
+<br /></div>
+<div>
+<b>10. Who Installed Atom?:&nbsp;</b>Which user installed Atom? [Answer is the complete SID not the username] <br />
+<br />
+When doing a keyword search for Atom, we see hits for the executable downloaded by Max Powers profile. We also see that Atom.exe is loaded into the AppCompatCache found in the NTUSER.DAT file for Max Powers. You can get the SID's for each user parsed from the SOFTWARE registry file.<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhplV7U3j_MgMONAUo86qvFq9VOhiWOj-o_RYQ0uTYvj5TvEe799AE4YFmF-3EJg6dWo9vY7O4dYrg9aOOjV_C9VH1oL4vz_51keCb1Vbn2poFEXUmU9DzcQgAgApJciFzYgOvm05VdlzA/s1600/maxpowers_atom.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="29" data-original-width="773" height="24" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhplV7U3j_MgMONAUo86qvFq9VOhiWOj-o_RYQ0uTYvj5TvEe799AE4YFmF-3EJg6dWo9vY7O4dYrg9aOOjV_C9VH1oL4vz_51keCb1Vbn2poFEXUmU9DzcQgAgApJciFzYgOvm05VdlzA/s640/maxpowers_atom.PNG" width="640" /></a></div>
+<br /></div>
+<div>
+The answer is "S-1-5-21-2801897208-1878083585-4182000528-1002".<br />
+<br />
+<b>11. Deletion in LogFile:&nbsp;</b>The $LogFile shows at LogFile Sequence Number [LSN] 4433927454 a file is deleted. What is the name of the file that was deleted?<br />
+<br />
+For this, we exported the $LogFile from the root of C: and parsed it using LogFileParser. When looking at the CSV in TimelineExplorer, you can search for the LSN.<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWZ9ZdsLPP3mqBGrFHFVOPjq12HFVmBqKYADnl3JY68gl1Nd-oBUIxKUm1wE0qVeosZyVt9Yxu9n9N0q2GwLCypc5eqelT4jFCLUsqAT6rCjp_zlXTOz4Dp_fbM6N2YOVSgwfJeyzaUu4/s1600/LogFile_7zip_Deletion.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="155" data-original-width="949" height="104" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWZ9ZdsLPP3mqBGrFHFVOPjq12HFVmBqKYADnl3JY68gl1Nd-oBUIxKUm1wE0qVeosZyVt9Yxu9n9N0q2GwLCypc5eqelT4jFCLUsqAT6rCjp_zlXTOz4Dp_fbM6N2YOVSgwfJeyzaUu4/s640/LogFile_7zip_Deletion.PNG" width="640" /></a></div>
+<br />
+As you can see from the screenshot, the LSN previous listed for that entry has a file name of "7z.dll".<br />
+<br />
+And that is all for Part 1, the Miscellaneous category. Look for more write-ups and answers later this week.<br />
+<br /></div>
+</div>

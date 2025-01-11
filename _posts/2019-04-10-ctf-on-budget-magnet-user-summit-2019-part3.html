@@ -1,0 +1,114 @@
+---
+layout: post
+title: CTF on a Budget - Magnet User Summit 2019 (Part 3) - Activity
+date: '2019-04-10T13:41:00.001-04:00'
+author: Kevin Pagano
+tags:
+- CTF
+- Magnet User Summit
+modified_time: '2020-09-11T09:33:05.991-04:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKOU3HkynIdYeNCUQjgMHg9LyaZx6feDE3HlF4Ug2Q03y-aygTqVQwFb78GtY2RI3Te4YMqD5NTwaHoFheu_q_H9zO70U6v3QB6zuxAQfq3gQ8N7MDBiEd2OHdPtpoqMrWUWrjvvBn66I/s72-c/Capture.PNG
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-1289583959943981359
+blogger_orig_url: https://www.stark4n6.com/2019/04/ctf-on-budget-magnet-user-summit-2019-part3.html
+---
+
+<div style="text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKOU3HkynIdYeNCUQjgMHg9LyaZx6feDE3HlF4Ug2Q03y-aygTqVQwFb78GtY2RI3Te4YMqD5NTwaHoFheu_q_H9zO70U6v3QB6zuxAQfq3gQ8N7MDBiEd2OHdPtpoqMrWUWrjvvBn66I/s1600/Capture.PNG"><img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKOU3HkynIdYeNCUQjgMHg9LyaZx6feDE3HlF4Ug2Q03y-aygTqVQwFb78GtY2RI3Te4YMqD5NTwaHoFheu_q_H9zO70U6v3QB6zuxAQfq3gQ8N7MDBiEd2OHdPtpoqMrWUWrjvvBn66I/s1600/Capture.PNG" /></a></div>
+<br />
+<a href="https://www.stark4n6.com/2019/04/ctf-on-budget-magnet-user-summit-2019.html">Part 1 - Desktop</a><br />
+<div>
+<a href="https://www.stark4n6.com/2019/04/ctf-on-budget-magnet-user-summit-2019_9.html">Part 2 - Mobile</a></div>
+<div>
+<br /></div>
+<div>
+For part 3, we will look at the activity portion that focuses on Sharepoint, network sessions, and notification popups.</div><div><br /></div><span><a name='more'></a></span><div><br />
+<b><u><span style="font-size: large;">ACTIVITY</span></u></b><br />
+<br />
+<b><span style="font-size: large;">1. Sharepoint - How many files were downloaded from the megnetic4nsics Sharepoint?</span></b><br />
+Parsed from the Chrome Downloads we can see one document was downloaded from the Sharepoint site.<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/jkybjKeM2bXiKcJVqszfjSmtVTJqAzvBot-n8JDkZM42-OiqVKNGdGQTlzfYuYWm5iW85FYKSW4qyujIu9fvY5sGIpvR_kjvYStPXwCU-E_PvMgGAAaT9aFSWEyC4RsgzlzvPLG3" /></div>
+In the Edge downloads we can see one zip folder was downloaded from the Sharepoint.<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/7Xe_pij6ieAS7NEforcCTvOmHRTGzA-TuEy2hv3vq_L8AXcYMOTAMV98pL9B2yg913g5qIINQwzY10XMh0-H1X2AUVPAYeFKls69SgJMyWpSfEwm-MGz1Bfbx-gg4ROt4tVXw6Wn" /></div>
+So we can infer that <span style="background-color: yellow;">2 files</span> total were downloaded.<br />
+<br />
+<div>
+<b><span style="font-size: large;">2. Sharepoint 2 - Whats the name of the archive that was retrieved from the sharepoint?</span></b><br />
+The name found in the previous question would be “<span style="background-color: yellow;">OneDrive_1_3-18-2019.zip</span>”.<br />
+<br />
+<b><span style="font-size: large;">3. Notify - On March 18th 2019 at 18:58:21 Selma saw a Windows popup notification. What type of notification was it?</span></b>First we export the wpndatabase.db file from the following location:<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/8GL1m7uiJ_pH_w_Vh0bgdNkL7YuwrC39BOcamOrffxbBzhNsVomVbTqUz4KQNlcyv57v7qXkAvP8ZHfFidgfYe0iQeLQPWBbC9_jCLPvKCCtVKFR2AgHy7WnNPHl_gUEkByWsSbS" /></div>
+<br />
+We can then open the file with DB Browser for SQLite and run a simple query on the Notification table (thanks <a href="https://twitter.com/SwiftForensics/status/1115352081219706880">Yogesh</a>!).<br />
+<br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">SELECT type, case ArrivalTime <br />when 0 then ''<br />else datetime((ArrivalTime/10000000) - 11644473600, 'unixepoch') <br />end AS ArrivalTime<br />From Notification<br />order by ArrivalTime desc</span><br />
+<br />
+The results show that it was type “<span style="background-color: yellow;">toast</span>” for that date/time.<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/b2yb0J6BQkNiSWRyFkyKph-b6hF6tJtWoj21wsX9ycvkQfzd89ytY61M-Tv979vv2_Dy1gqBOMJq2Yq55iIPNZC4PtRIAixcpgNCN2qrq_g0BSYIR2EfLOIWQur1FjX6MB2cxcA5" /></div>
+<br />
+<b><span style="font-size: large;">4. Sharepoint 4 - Which was retrieved from the sharepoint first?</span></b><br />
+From the previous questions we can see the date/times of when the files were download.<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/XrOvOY6i4UMBb41T6AE_lhn4JY2gftKqyCVOv-X_oCYPcrssnCHXBbi7nMJYLtB7Zk6dV1wVAX_TlXtpbh4I5pZNmto86y7Ptf3g_TUK_xqgMbmFkc-4f6626IQoDnscoF3YWQN0" /></div>
+<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/0kqDXgocsYr5m2mYUJzEBiym5n_uj8fG4kaQlijrgyDLeBCZR31UyiIR97Z75bdB1eRq4Qj-ZB7pKj4hKyCj8uQOIktpIUhKUaA26pr7OZQLqaItJXbsgKRAQ9flnDrlw1E_3ZGO" /></div>
+<br />
+<span style="background-color: yellow;">README </span>came first on 3/14/2019 and followed by OneDrive_1_3-18-2019.zip on 3/18/2019.<br />
+<br />
+<b><span style="font-size: large;">5. Remote - At 6:35PM on the 18th of March, Selma logged into her account on the Desktop. What method of did she use to access the Desktop?</span></b><br />
+Filtering down to the day and the approximate time, we can see in the prefetch that <span style="background-color: yellow;">TeamViewer </span>was run right around the time period.<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/NJ0OD5SUtHFZGCLm2krv86VNtXb33if-kgkaYnb7bqCGO9Tw4ZQSTSvo17GK8zdT_RNwhjA7encAyElKfCh3HebMFrhKXctz6i8fXngEFUW5shthBNpOVSKJrSzeNmcSEz8xtmmc" /></div>
+<br />
+<b><span style="font-size: large;">6. Host Name - What was the host name of the machine Selma used to remote into the Desktop at 6:35PM on the 18th of March?</span></b><br />
+Knowing that TeamViewer was used, we can find a connections log in the Program Files folder.<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/7ARyuBaXoVtzdfa4Gf0BRiZx2G6r6-D8VomyTcacY7q5Kh3rUa7hHfrY_jLm6hGvVJ-8A4b0nPy6hDU6wr1inHdXIUICyJzRlZW6SpElVVtFepr0m5L5ir4LIlIPbLqcnTy9jB7n" /></div>
+<br />
+When opening the log, we see a list of connections, with hostnames and date/time stamps of connecting. The answer is “<span style="background-color: yellow;">JHYDE-SP</span>”.<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/5CXjzVhUQXZqBTeS16JPPJO_g0lv-ZTlUUea5A0RF7kcsMS3iPMkXzpJwdY_T6JjnCL62QDYaeikaLdeYyaR7Jie4NPUv7YbX1qKK6Ne7MSm3yc8WbKCmMWyb1fzySXZuQPNklIe" /></div>
+<b><span style="font-size: large;">7. Unique Access - How many unique machines accessed the Desktop via TeamViewer?</span></b><br />
+In that same "Connections_incoming.txt" log file, we can tell that there are <span style="background-color: yellow;">3 unique </span>machines that connected. It appears that some sort of GUID is shown in column A.<br />
+<br />
+<img src="https://lh3.googleusercontent.com/K1o7XyfJmolRzC_WcMmGdJKQ9wEf3f0WLwIz02yRyKynaW3jMvRur9qOz3cKbhA2C6rKASxYziKAhgVP0bCRFpw1Qc6xbyRsztIUKsjej8pD2qoU5pVTxXhBBnBTYCFuDksObBzv" /><br />
+<br />
+<b><span style="font-size: large;">8. Sharepoint 3 - What is the volume serial number of the volume the sharepoint archive was placed on (format: decimal number)?</span></b><br />
+Since we know the name of the file “OneDrive_1_3-18-2019.zip”, we can do a quick keyword search for it and look at LNK files to find the VSN.<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/_1JBwYEJ4ceIbnecAN7RvAXhTLSGqFP638PHYR8QVxNC1k2ns7OFryLMzrneYXLwbwWV7_ykJt9S3Y5dHPwlD3oEOaDVgvhqxQReYofsgjvBbQr1VBdybqr5vbTEV3wDGiILADK9" /></div>
+<br />
+The catch here is that it is displayed in hex so we can convert it to the preferred format of decimal (<span style="background-color: yellow;">2935122090</span>).<br />
+<br />
+<b><span style="font-size: large;">9. Notify 2 - Again, on the 18th of March at 18:08:57, another notification was given. What did this notification say?</span></b><br />
+Using the same file from Q2, we use the following query:<br />
+<br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">SELECT payload, case ArrivalTime <br />when 0 then ''<br />else datetime((ArrivalTime/10000000) - 11644473600, 'unixepoch') <br />end AS ArrivalTime<br />From Notification<br />order by ArrivalTime desc</span><br />
+<br />
+The payload dumps out to be:<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/T7Ek_bkJoprkOef70Hbz13NhyXI2rhJEWOq5VIQUg0rsEeHtpwyfGpF4nHXEelH-iPIhkYghGuJryDGLGpw5R66BcfnjV83vojyHdkkNTY7TWjMg-dBiwGWiJZ4uNu12zD4agVMd" /></div>
+<br />
+In the CDATA tag we see the message <span style="background-color: yellow;">You are now syncing "OneDrive - Magnetic4nsics".</span><br />
+<br />
+<b><span style="font-size: large;">10. Bytes Sent - How many bytes total were sent out on the network via the Team Viewer Service?</span></b><br />
+You need to first dump the SRUDB.DAT file found within System32:<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/vwTiynQYM0UM2k3lvsuOSVsL3RPRZp14kGGUMBkGyvKx7AIcmkDl4Y3ndg9jPwAS2G3TmQL1h-tNSZVP8caBPxiEojqf4_dbRwVOpsVSETb1wh47jgtir_Z7RWtTmkLnr7DRmkJO" /></div>
+<br />
+Once exported we can use Nirsoft’s NetworkUsageView to open and filter on Team Viewer Service, and export the associated entries to CSV. Once we open that, we can calculate the sum of the Bytes Sent to be <span style="background-color: yellow;">95681804</span>.<br />
+<br />
+<table cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><img src="https://lh6.googleusercontent.com/gndk9tBeNL1w_wA6fahIGx43nHQaO_U1oimSfWHHjbMslIbtqrLT7fHFAx6sw9iFwnpc74ZKkL_Obn5yKLOhaN8UBipGMAR_qxDc0tYB7srxaaJuegYiZTltWZhtvwSzoeWUN-ZG" style="margin-left: auto; margin-right: auto;" /></td></tr>
+<tr><td class="tr-caption" style="text-align: center;">(A sample of the output in NetworkUsageView)</td></tr>
+</tbody></table>
+</div>
+</div>

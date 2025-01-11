@@ -1,0 +1,96 @@
+---
+layout: post
+title: 'TeraCopy: A Forensic Analysis (Part 1)'
+date: '2018-11-19T19:24:00.002-05:00'
+author: Kevin Pagano
+tags:
+- TeraCopy
+modified_time: '2019-01-21T19:34:48.894-05:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXjxx0w-NxddZU3b38i8nvwY_x8laiivypt4gSYuFVMf5YVBm7OD8rHAJSIoMVpbHFWwPODdX8NyK0qwS4EZ3CiUBA8I30cBdzXjvT_I49tDkoEuP4-c4Q-CwGoDtUXSlM2Biqv10vfmA/s72-c/teracopy.jpg
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-2970478836973356927
+blogger_orig_url: https://www.stark4n6.com/2018/11/teracopy-forensic-analysis-part-1.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXjxx0w-NxddZU3b38i8nvwY_x8laiivypt4gSYuFVMf5YVBm7OD8rHAJSIoMVpbHFWwPODdX8NyK0qwS4EZ3CiUBA8I30cBdzXjvT_I49tDkoEuP4-c4Q-CwGoDtUXSlM2Biqv10vfmA/s1600/teracopy.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="203" data-original-width="360" height="180" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXjxx0w-NxddZU3b38i8nvwY_x8laiivypt4gSYuFVMf5YVBm7OD8rHAJSIoMVpbHFWwPODdX8NyK0qwS4EZ3CiUBA8I30cBdzXjvT_I49tDkoEuP4-c4Q-CwGoDtUXSlM2Biqv10vfmA/s320/teracopy.jpg" width="320" /></a></div>
+<br />
+<br />
+<a href="http://codesector.com/teracopy">TeraCopy</a> is a great file transfer tool that I have been using for years because it was always faster than the Windows built in copier, allowed for pausing/resuming as well as many other features Microsoft lacked in Win7 (Win10 has added some of those). The other big thing that it was helpful with was that TeraCopy would keep all the original date/time stamps of the documents regardless if you used copy or move which was very helpful for keeping the forensic validity intact.<br />
+<br />
+For information on the interface, you can find screenshots and descriptions <a href="https://codesector.kayako.com/article/13-main-screen">here</a>.<br />
+<br />
+A recent case took me down the path of seeing if a user had stolen documents after they left the company for a possible competitor. My first instincts were to look at the usual locations: USB history, Recent folder and LNKs, shellbags, and Outlook/webmail. I noticed some activity that a USB drive was plugged in a week prior to the users departure date as well as some shellbag activity showing some folder structuring into what that USB had on it.<br />
+<br />
+In my searchings I just so happened to stumble upon the DB log file for TeraCopy so naturally I decided to open it up and see what was inside. I'VE HIT THE MOTHERLOAD!<br />
+<br />
+<div style="text-align: center;">
+<span style="font-family: Courier New, Courier, monospace;">C:\Users\<b>&lt;USERNAME&gt;</b>\AppData\Roaming\Teracopy</span></div>
+<br />
+This folder contains the "main.db" file which shows a list of TeraCopy jobs that were run. It also has another folder titled History which has separate DB files for each job that was run.<br />
+<br />
+For this post we'll focus on the main.db file. It has 11 columns broken down to include the name of jobs run, the date/time the job was started, the source and target destinations for the jobs, the amount of files and the total size of the files in the job.<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhypGQWx3aaAijHFadJBwQoFtoXkeP55aSB9gvM0ErCq-cMrC8LmvmE_DVNstpk9rqPnOhbnyd6_lsWJ2WGTwxw7Ey9x6XkbzPzGF5d1zsGYl8vvRryQG2eX2LMz9zykOFCEFz_oGLVZas/s1600/main.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="308" data-original-width="191" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhypGQWx3aaAijHFadJBwQoFtoXkeP55aSB9gvM0ErCq-cMrC8LmvmE_DVNstpk9rqPnOhbnyd6_lsWJ2WGTwxw7Ey9x6XkbzPzGF5d1zsGYl8vvRryQG2eX2LMz9zykOFCEFz_oGLVZas/s1600/main.PNG" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsEiR28O_UQ0zm2-JCuqb-Hgr2BEgJ7i9co-oaHy7vRBDezCJ1s_m0yCjHr_Kv2DhC3lD-uPtzR8vuAPXQFHmmQFNOuNccsowmT6NLDGGttT1t7F7nGU8yq3ar4eqdUSp85O0he_bvCTI/s1600/Teracopy.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="194" data-original-width="1600" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsEiR28O_UQ0zm2-JCuqb-Hgr2BEgJ7i9co-oaHy7vRBDezCJ1s_m0yCjHr_Kv2DhC3lD-uPtzR8vuAPXQFHmmQFNOuNccsowmT6NLDGGttT1t7F7nGU8yq3ar4eqdUSp85O0he_bvCTI/s1600/Teracopy.PNG" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<b>State </b>- status of the job<br />
+0 - Pending (will also show this when Operation is Test)<br />
+1 - TBD, couldn't replicate but happened when copying the database file at the same time it was being written to I believe<br />
+2 - Completed<br />
+<br />
+<b>Name </b>- name of the job (YYMMDD-HHMMSS naming convention, in UTC)<br />
+<br />
+<b>Started </b>- date/time when the job was started in Julian format with offset of the computer's timezone (Never saw that format until now, thanks <a href="https://ssd.jpl.nasa.gov/tc.cgi">NASA</a>&nbsp;for the clue!)<br />
+<br />
+<b>Finished </b>- TBD, always been empty<br />
+<br />
+<b>Operation </b>- Type of operation that was performed in the job<br />
+1 - Copy<br />
+2 - Move<br />
+3 - Test (basically a verification check)<br />
+6 - Delete (provides a deletion screen, with 3 options, all which lead to the same operation number)<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4J2ljASgYCfF9qrxizYfrNqaLG6LsDOQPRi4n8aSju2foGnXfh8lpu54AX9P0Ypd5jz2-8XLalSmX_psyGMy5dl5s-pQrFdiqOZMBQEzJB4xLV4sBMQZyguLpa4usMJiz1XKa2G3P1p4/s1600/operation.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="238" data-original-width="722" height="209" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4J2ljASgYCfF9qrxizYfrNqaLG6LsDOQPRi4n8aSju2foGnXfh8lpu54AX9P0Ypd5jz2-8XLalSmX_psyGMy5dl5s-pQrFdiqOZMBQEzJB4xLV4sBMQZyguLpa4usMJiz1XKa2G3P1p4/s640/operation.png" width="640" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Source </b>- Folder location of the source folder/file (will show "multiple" if more than one file was dragged from different sources)</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+Target - Folder location of where the job was executed (operations Test and Delete leave this blank)</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Overwrite </b>- TBD, always been empty</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Close </b>- TBD, always been empty</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Files </b>- The total count of files in the job</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both;">
+<b>Size </b>- The total size of all the files (in bytes) in the job</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+Part 2 will look at the History folder and job DB's.</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b>UPDATE 11/23/2018:</b> <a href="https://www.stark4n6.com/2018/11/teracopy-forensic-analysis-part-2.html">Part 2 is live</a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b>UPDATE 12/3/2018:</b>&nbsp;<a href="https://www.stark4n6.com/2018/12/teracopy-forensic-analysis-part-3.html">Part 3 is live</a></div>
+<br />

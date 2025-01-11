@@ -1,0 +1,153 @@
+---
+layout: post
+title: CTF on a Budget - Magnet User Summit 2019 (Part 1) - Desktop
+date: '2019-04-08T16:00:00.001-04:00'
+author: Kevin Pagano
+tags:
+- CTF
+- Magnet User Summit
+modified_time: '2020-09-11T09:33:40.968-04:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxaUa72fuAVfPhJIGsUmGSzhKliSe3H9P6AsyfWnlVcQvedinsHS6_ehAnL0IOzTxBF8BN1JpHgO9qyYfDOzGqlfN0RT38swdFxLoMuBgv0tyMJDK6F0hulrlBmUsxN_HsbdIKTQPaMH4/s72-c/Capture.PNG
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-1658318063017595757
+blogger_orig_url: https://www.stark4n6.com/2019/04/ctf-on-budget-magnet-user-summit-2019.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxaUa72fuAVfPhJIGsUmGSzhKliSe3H9P6AsyfWnlVcQvedinsHS6_ehAnL0IOzTxBF8BN1JpHgO9qyYfDOzGqlfN0RT38swdFxLoMuBgv0tyMJDK6F0hulrlBmUsxN_HsbdIKTQPaMH4/s1600/Capture.PNG" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="297" data-original-width="539" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxaUa72fuAVfPhJIGsUmGSzhKliSe3H9P6AsyfWnlVcQvedinsHS6_ehAnL0IOzTxBF8BN1JpHgO9qyYfDOzGqlfN0RT38swdFxLoMuBgv0tyMJDK6F0hulrlBmUsxN_HsbdIKTQPaMH4/s1600/Capture.PNG" /></a></div>
+<div dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+<br /></div>
+<div dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+I got the chance to partake in the Magnet User Summit CTF once again this year with much better results (<a href="https://www.stark4n6.com/2019/04/magnet-user-summit-2019-recap.html">see my recap</a>). Even though I didn't get all the answers right when I did it live, going back through on a second pass gives me a chance to finish tough questions that I couldn't get. In part one we will break down the Basic - Desktop portion of the CTF.</div>
+<div dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+<br /></div>
+<div dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+<b><i>Note: </i></b>While I did use AXIOM for a good chunk of this, we were provided a license to do so. Other wise, I used only free tools to answer the questions.</div>
+<span><a name='more'></a></span><b style="font-weight: normal;"><div><br /></div></b>
+<div dir="ltr" style="line-height: 1.38; margin-bottom: 0pt; margin-top: 0pt;">
+<span style="background-color: transparent; color: black; font-family: inherit; font-size: large; font-style: normal; font-variant: normal; font-weight: 700; text-decoration: underline; vertical-align: baseline; white-space: pre;">Basic - Desktop</span></div>
+<br />
+<b><span style="font-size: large;">1. Desktop Hash - What is the SHA1 Hash of the Desktop Image?</span></b><br />
+<br />
+<img src="https://lh4.googleusercontent.com/va7OG8oaivKIQszorjuxSXK-rT4xJg8RuD-xa_Buv0vrK0tot96T-Yv-EUA4jbDeOQ6yv8XEw66rOhFDgu6sbnthqDeEoxpfqr4Leo1hcFYThT15Ql7dnxsyNEmpK2S-B2qZKoMK" /><br />
+<br />
+Open the E01 text file associated with the imaging process. The hash will be "<span style="background-color: yellow;">a20c2f43a80ddcad35b958b701a6cdd4b67e535c</span>".<br />
+<br />
+<b><span style="font-size: large;">2. Desktop Examiner - Who acquired the Desktop image?</span></b><br />
+<br />
+We can look in that same imaging information file to find the examiner, <span style="background-color: yellow;">M Powers</span>.<br />
+<div>
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/EPezU4_OO6U6whAT6t6aNCB4qiSR5Eq8NQPv_gkFg08xJ32bv1OezKiT65LnCU_Bj4xnJs9zlUbL-d0TFRsJ_IUuc19gorrcl0nSTU0mmbgPIUd8Vg9XRA-M52sGA_tn8cEcots3" /></div>
+<br />
+<b><span style="font-size: large;">3. Desktop VSN - What is the Volume Serial Number of the Desktop’s OS volume?</span></b></div>
+<div>
+<b><br /></b></div>
+<div>
+When loading up the E01 file into Axiom, clicking on Operatin System &gt; File System Information shows the VSN in the details, <span style="background-color: yellow;">CCEE-841B</span>.&nbsp;<b><br /></b><br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/FlSoHE_iRP8CZM3ImoSK1vNbkbsMam_cWgnUIzwVcST_jNSTvJS7qNuDbFv8SirCnox4_kN3Q9mFbghF5Js2IKHZgY9nE722Tiy89ajYcNy6MpXj4efaMr2SerC-E0Vb8pc7l7jO" /></div>
+<br />
+<b><span style="font-size: large;">4. Timezone - What is the timezone of the Desktop</span></b><br />
+<br />
+Also located in the Operating System section is Timezone information, it shows <span style="background-color: yellow;">Pacific Standard Time</span>:<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/apaPSE_psZz0qp9NYSEmzlNV35KvVdfjK_6fB9miFaEnW90ram3gGJEsW8ytVCmfZGQWn42mtY-UYuJJQS1bqNP2pFNUbDPtkgcD5-d4W8odIPDCQEydGv9rBDL0eyPa7Oh8C4wW" /></div>
+<br />
+<b><span style="font-size: large;">5. Install - Which user installed TeamViewer?</span></b></div>
+<div>
+<b><br /></b></div>
+<div>
+In the Shimcache, we can see execution of the “TeamViewer_Setup.exe” from the path located in the Administrator’s Downloads folder.<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/EzyUSsB3ycVztjOCgwgRhMaZIL6L2BiJGCqWrlHifQDIJQzOIi76Wjxru-5AMaQtslLvP4O1Tyn4ApRMz2n1wmwrqsHLyHEsROYchCux9qdjc4BpEPXp9tTmuqmCKUQ5PcKoA_vn" /></div>
+We can also see SRUM application usage from the same folder:<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/KO8dw6BEd-juCUwcGgJU3U8ppMQexEx0ZrJEMSOmCm-8ewSvU0b0RBQsZybT-6JO4MORXYivVSii3hM1vf6Dew3ff5GiDziyksOZKPEipunUO23AJRJnPhDr0LwoHJY6ue59tZ3F" /></div>
+It looks like the <span style="background-color: yellow;">Administrator</span> installed it.<br />
+<br />
+<b><span style="font-size: large;">6. UTC Offset - What was the timezone offset at the time of imaging?</span></b><br />
+<br />
+Coordinating the image information Acquisition start/finish (below) with the Pacific Standard Time timezone of the drive from Q4, we can calculate that it should be <span style="background-color: yellow;">UTC-7</span>.<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/ZFmXY4eqPPNLuBVfo2S8FZ4udPaU51GiM7zI2_miQLL_8KbUlIR2tw1gQZzxg2Ntd_ciVGxpmqNLVQmWtVQmP0ezIoWoA3bHEphbjxOiEIpYuzW-MTRW3LjUv5BfnRrkfDsnrXx7" /></div>
+<br />
+<b><span style="font-size: large;">7. How Many Times - At least how many times did the teamviewer_desktop.exe run?</span></b><br />
+<br />
+Looking at the prefetch file associated with “teamviewer_desktop.exe” we see that the executable was run <span style="background-color: yellow;">3 times</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/pBS8eMvHQb5FD-NolsFrm9cB1PByU2OVJ44vgpm1HINoScKHuORwPvb2xIsKydcABd-ICgBdjSI0liWWvoOH7j6D2oxIooHW9ytXmPpcUPh4p2K5CGLFH_R-naTQJVB5BaI28RCl" /></div>
+<b><span style="font-size: large;">8. OS Install Date - When was the Windows OS installed?</span></b><br />
+<br />
+In the “Operating System Information” we can see when the OS was installed, <span style="background-color: yellow;">7/28/2018 on 7:27:53 AM</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/dwyjY4QmhnWu8TT9xei4fU6pjUkD7h6NaBfPsv-C316yGbROfJ7QEoEoIhd0RYH5O6EDmkIYJY022GZ5rwEmMjwGdD_HcunPBdUmdrnSsw96Vy4hglq6obGmaA0JZ02hbqkdUvZf" /></div>
+</div>
+<div>
+<br />
+<b><span style="font-size: large;">9. File Name - What is the name of the file associated with MFT entry number 102698?</span></b><br />
+Since AXIOM doesn’t process MFT files, we can export the $MFT from root and parse it using Eric Zimmerman’s MFTECmd. Once the CSV is exported we can load it into Timeline Explorer, filter on “Entry Number” and see file name, "<span style="background-color: yellow;">TeamViewer_Setup.exe</span>".<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/pHQJpkVZy8zfVD1JPei9fFkx6a6jJryZJUz4pA7KFFyxEZQB5NlvOtu2CGZD5nImP0GD-Miu-reZjYDjppJvmxN8p6nCenC6qMo48J3omZWSBaKqLW_geLZARI_CygL3Gl4q38Ky" /></div>
+<br />
+<b><span style="font-size: large;">10. Sequence Number - What is the MFT sequence number associated with the file "\Users\Administrator\Desktop\FTK_Imager_Lite_3.1.1\FTK Imager.exe"?</span></b><br />
+<br />
+Similar to the last question, we can load the MFT report into Timeline Explorer, this time filtering on the File Name column and the answer is there in the Sequence Number, <span style="background-color: yellow;">4</span>.<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/VomUaSUjPbJTbAqhTGWVisCq-YOj2ekkTrIbnUBQA8fECV-F6VibjuslXGoQN16B2iDmWXolSpO3oxqbOe0tUpbVflnr8M9QqXii-C_Wf_aE3nUMiQz5vRZ4IatmGkQdc7oLnuhA" /></div>
+<br />
+<br />
+<b><span style="font-size: large;">11. USN - Which file name represents the USN record where the USN number is 546416480?</span></b><br />
+<br />
+Looking at the UsnJrnl artifacts, we can filter on the Update Sequence Number and see it was associated with file "<span style="background-color: yellow;">TransportSecurity~RF134e6674.TMP</span>".<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/-sSLFGDGf5RQTIocjKXAfguJw0U5glkyyrP-FgRUXRh_DzXfej5M1Tg4ldqcW7GQphxXJL4yW0X5o6fywakwERCFvJRzsV0TVtWsmR-m_LJtK5WsJnVZFsWw0MYyYkb584T4EnRd" /></div>
+<br />
+<b><span style="font-size: large;">12. IP - What is the IP address of the Desktop?</span></b><br />
+<br />
+Under Network Interfaces, we can find the Ethernet adapter shows the IP address as <span style="background-color: yellow;">64.44.141.76</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/2mmqJ3TZeK3Lt15qBgBkwiKgeYY3W_pska74-wt8M66mjWE4XmhsxSObI7ZIM06sd7tatu-ccnaaPWMy8H9pnlkzOYD4-ZjD877TWe-5xIyTATwpXvMbKfxY9P0fvtllOAGYnFlf" /></div>
+<br />
+<b><span style="font-size: large;">13. Who Shut it Down - Which User Shutdown Windows on February 25th 2019?</span></b><br />
+<br />
+We can look at the Windows Event logs and filter on event ID 1074. This shows the following for that day:<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/T_xl00V6yff6Hc5TLbV4iK0KxctUnqrzAbPue1yg3ihOyK3uokeOZJFCkhdizv_53E11BI-JtsMxCSyX-IZbl8qzqWuZ8Yy2U9KIP7LsgihH51v1FodK2TKXeL1PVA7dXLvcLwYb" /></div>
+<br />
+We can then look up the user profile associated, which was the <span style="background-color: yellow;">Administrator</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/88Gz0hS7Ejy_-JTWSiH6vaBVDfe5BxKSqEVKJ3I4qRaE5d_tpuJnNfJGJhWV01juVfjY2uUZMJ9FL5AMWxUtPJvBchzkpkhrjGmyMGD-yxfeTc8ltBccbbKadTbnxMXQjt0OVmNo" /></div>
+<br />
+<b><span style="font-size: large;">14. Sha What - What is the SHA1 hash of the c:\users\selmabouvier\appdata\local\packages\microsoft.microsoftedge_8wekyb3d8bbwe\tempstate\downloads\megasyncsetup (1).exe file?</span></b><br />
+<br />
+We can find the file in the folder structure and export. Once exported we can drag and drop the file into Nirsoft’s HashMyFiles to find the SHA1, <span style="background-color: yellow;">082129a2b431f36a194f2594e3987e31b22dc5ea.</span></div>
+<div>
+<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/B1YRid5Xz8PDRcENbB5KPMSy4XiBVgcIjkMbOP-87t2jSZHGIfgMA5cqSJQpNhEjWEQ0bB6lJx0Ax1F-unJHc3Ldo1LEP0aqRqZoobuoMG_fQRlWsIhqvuLTVECr8RBHpv_2m87n" /></div>
+</div>
+<div>
+<br />
+<b><span style="font-size: large;">15. Execute Where - After looking at the TEAMVIEWER_DESKTOP.EXE prefetch file, which path was the executable in at the time of execution?</span></b><br />
+<br />
+For some reason AXIOM doesn’t parse the execution path (from what I saw), so we can export the prefetch file and dump it into Nirsoft’s WinPrefetchView to see that:<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/Vms1SdrsWoDimXenOdnYNr-_UYA9fy6FL6vjHTUilDC9qB_SIPC5yBQNy9zRPcq9IpPY4ns0fkxt3aFpk5GDPOzpyqI6GZZ41Z8Ieb8blNOUL-e7_pagkEPOEgXGep9uOrJ7kDjO" /></div>
+<br />
+The path is:&nbsp;</div>
+<div>
+<br /></div>
+<div>
+<span style="background-color: yellow;">\VOLUME{01d4264bee777579-ccee841b}\PROGRAM FILES (X86)\TEAMVIEWER\TEAMVIEWER_DESKTOP.EXE</span><br />
+<br />
+<b><span style="font-size: large;">16. File Name 2 - What is the file name that represented MFT entry 60725 with a sequence number of 10?</span></b><br />
+<br />
+For this, we want to look at parsing the UsnJrnl $J file. We can export the file and parse it using MFTECmd using the $J switch. Once the CSV is exported throw it into Timeline Explorer and filter on Entry Number and Sequence Number columns. The file is "<span style="background-color: yellow;">telemetry.P-ARIA-194626ba46434f9ab441dd7ebda2aa64-5f64bebb-ac28-4cc7-bd52-570c8fe077c9-7717.json.new</span>"<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/4UEEBkUg8FlzOZXXJH53Chue61FxV83dhVDrbBFDeDht1U1VwPmG09079Fhl5pgMPFpu9t_tFrXoJEIDhpfWuFay3L4EjIBy6IcKI7LSukdyK8nbsnbYlOqXxk_UcUKPLofITTc1" /></div>
+</div>

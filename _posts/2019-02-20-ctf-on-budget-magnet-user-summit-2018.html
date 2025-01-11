@@ -1,0 +1,125 @@
+---
+layout: post
+title: CTF on a Budget - Magnet User Summit 2018 (Part 2)
+date: '2019-02-20T21:41:00.000-05:00'
+author: Kevin Pagano
+tags:
+- CTF
+- Magnet User Summit
+modified_time: '2019-02-21T21:10:59.683-05:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgc6OJ7HszYnHMrcZY-4Bn9rWiczncoPvk31Pvln0whMVo-h-JmbP07qhG11o25Z95FIn1WuUEhegMhuwagRCsg2ELkUjOxb3LOcPDm4zPy8O4V-7ViA0xHhsClhcR2l-4Svtq408Hv0ws/s72-c/EraserRun.PNG
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-3753935102029514826
+blogger_orig_url: https://www.stark4n6.com/2019/02/ctf-on-budget-magnet-user-summit-2018.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://www.magnetforensics.com/wp-content/uploads/2018/03/CTF_callout.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="445" data-original-width="445" height="320" src="https://www.magnetforensics.com/wp-content/uploads/2018/03/CTF_callout.png" width="320" /></a></div>
+<div>
+<br /></div>
+<div>
+In <a href="https://www.stark4n6.com/2019/02/ctf-review-magnet-user-summit-2018-part.html">part 1</a> we broke down the answers to the Miscellaneous category .As we continue on through the Magnet User Summit 2018 CTF we now get to the Anti-Forensics section.In this section I got to use some different free tools as well as some tried and true along the way to answer the questions.</div>
+<div>
+<br /></div>
+<b><u><span style="font-size: large;">Anti-Forensics</span></u></b><br />
+<br />
+<b>1. Wiping App:&nbsp;</b>Which application was used to wipe files on the compromised system?<br />
+<br />
+In the SOFTWARE registry file we can see a list of installed applications in:<br />
+<div>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">Microsoft\Windows\CurrentVersion\App Paths</span></div>
+</div>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><br /></span></div>
+<div>
+<span style="font-family: inherit;">The only one that sticks out is Eraser, which is the answer.</span></div>
+<div>
+<span style="font-family: inherit;"><b><br /></b></span></div>
+<div>
+<span style="font-family: inherit;"><b>2. User that Wiped:&nbsp;</b></span>What is the name of the user account that performed the wiping? [use a name not a SID]<br />
+<br />
+We found the Eraser installer in the downloads folder for user "itsupport". This doesn't mean this account ran it but gave us a clue to who to look at first. When we parse the NTUSER.DAT file using RegRipper, we can pull out the appcompatflags showing that Eraser.exe was run</div>
+<div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgc6OJ7HszYnHMrcZY-4Bn9rWiczncoPvk31Pvln0whMVo-h-JmbP07qhG11o25Z95FIn1WuUEhegMhuwagRCsg2ELkUjOxb3LOcPDm4zPy8O4V-7ViA0xHhsClhcR2l-4Svtq408Hv0ws/s1600/EraserRun.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="187" data-original-width="809" height="145" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgc6OJ7HszYnHMrcZY-4Bn9rWiczncoPvk31Pvln0whMVo-h-JmbP07qhG11o25Z95FIn1WuUEhegMhuwagRCsg2ELkUjOxb3LOcPDm4zPy8O4V-7ViA0xHhsClhcR2l-4Svtq408Hv0ws/s640/EraserRun.PNG" width="640" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+This date and time was corroborated by the prefetch file of the Eraser.exe as well so we can determine that "itsupport" ran the executable.</div>
+<div class="separator" style="clear: both; text-align: left;">
+<b><br /></b></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b>3. Data Written:&nbsp;</b>How much data did the wiping utility write to disk? [answer in bytes]&nbsp;</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+Now that we know Eraser was run we can look at the SRUM (System Resource Utilization Monitor) log found here:</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+</div>
+<div>
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">C:\Windows\System32\sru\SRUDB.dat</span></div>
+<br />
+<div class="separator" style="clear: both; text-align: left;">
+We can parse this file using&nbsp;<a href="https://github.com/MarkBaggett/srum-dump">SRUM Dump</a>. We want to look at the Application Resourch Usage tab, and since we know that Eraser was run on April 26th at approximately 6:40pm UTC, we can date filter and filter on the executable name. The only entry that matches is:</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFuG8qS0yI5gnrKD7h-vOR8_yBCc-634o5ZSgsxgExe5oEmMjtsQ0meAcnimaTiOBTwFwd4oWVu1mihB6xmK_MyYnuHc6M2pSicMfLSC8-8eJJ4d_85zxCfOb9EiORwL5R6mHzRJYYjtM/s1600/SRUM_Eraser.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="65" data-original-width="1026" height="40" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFuG8qS0yI5gnrKD7h-vOR8_yBCc-634o5ZSgsxgExe5oEmMjtsQ0meAcnimaTiOBTwFwd4oWVu1mihB6xmK_MyYnuHc6M2pSicMfLSC8-8eJJ4d_85zxCfOb9EiORwL5R6mHzRJYYjtM/s640/SRUM_Eraser.PNG" width="640" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div>
+We can see the ForegroundBytesWritten column shows how many bytes were written to disk, 27394048.</div>
+</div>
+<div>
+<br />
+<b>4. Browser to Download Wiper:&nbsp;</b>What browser was used to download Eraser? [Just the name, no versions]<br />
+<br />
+This one was fairly easy even though I sort of stumbled upon it. Parsing the NTUSER.DAT file for "itsupport" using RegRipper we can see that the Eraser installer was executed. In UserAssist we see that it resided under a Microsoft Edge temp folder, probably set to run after download instead of saving.<br />
+<br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">1524767943|REG|||[Program Execution] UserAssist - C:\Users\itsupport\AppData\Local\Packages\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\TempState\Downloads\Eraser 6.2.0.2982.exe (1)</span><br />
+<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;"><br /></span>
+<b>5. Wiped File Names:&nbsp;</b>List 5 original wiped file names. [comma separated]</div>
+<div>
+<br /></div>
+<div>
+There were a ton of file names that could have worked for this. What we need to do first is parse the $J file of USNJrnl. I used MFTECmd as this has a switch for it and runs super fast. After it was parsed to CSV I threw that into TimelineExplorer. We can filter down to the date of execution 4/26/2018 and scroll down to the approximate time of 18:41 and we will see some interesting activity.</div>
+<div>
+<br /></div>
+<div>
+If you filter the column "Update Reasons" with Rename, you will get a list of old and new file names.</div>
+<div>
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjH21LJgxN3Z0DiMaFjlAYcNQDp9pTDTr7KUJ_QoMAqdcMXjD22xDQwOySs_2JysP2I-5sjB7qcp69j-mDO1_0cER62BsW5OO4F3cbqMCuV8fwzq-qREKC49i7NM01ul4ZGuoL5Niegxqw/s1600/WipeRenames.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="73" data-original-width="774" height="59" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjH21LJgxN3Z0DiMaFjlAYcNQDp9pTDTr7KUJ_QoMAqdcMXjD22xDQwOySs_2JysP2I-5sjB7qcp69j-mDO1_0cER62BsW5OO4F3cbqMCuV8fwzq-qREKC49i7NM01ul4ZGuoL5Niegxqw/s640/WipeRenames.PNG" width="640" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+Some sample answers are:</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+ProjectU.exe</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+CustomStruct.py</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+c_test.py</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+update.sample</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+exclude</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+master</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+remotes</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+origin</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+heads</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+info</div>
+<div class="separator" style="clear: both;">
+</div>
+<div style="line-height: 100%; margin-bottom: 0in;">
+hooks</div>
+<div>
+<br /></div>

@@ -1,0 +1,29 @@
+---
+layout: post
+title: 'TeraCopy: A Forensic Analysis (Part 3)'
+date: '2018-12-03T15:51:00.002-05:00'
+author: Kevin Pagano
+tags:
+- TeraCopy
+modified_time: '2023-02-15T14:31:37.064-05:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgya0OBAO1CHzasO_6XKpCko1KSZ-I0piJteg6t3ra4Hm5Er-V2snIYUDTvHWifP5PQshoSW9Fm7eKBLAwa2qiCp9sLOcchNi_D8YBrn9vSclwvXA7m7UAEVwOtErhOqjyZZ4nK5VxnJ0o/s72-c/teracopy.jpg
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-9103274919737832332
+blogger_orig_url: https://www.stark4n6.com/2018/12/teracopy-forensic-analysis-part-3.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgya0OBAO1CHzasO_6XKpCko1KSZ-I0piJteg6t3ra4Hm5Er-V2snIYUDTvHWifP5PQshoSW9Fm7eKBLAwa2qiCp9sLOcchNi_D8YBrn9vSclwvXA7m7UAEVwOtErhOqjyZZ4nK5VxnJ0o/s1600/teracopy.jpg" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="203" data-original-width="360" height="180" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgya0OBAO1CHzasO_6XKpCko1KSZ-I0piJteg6t3ra4Hm5Er-V2snIYUDTvHWifP5PQshoSW9Fm7eKBLAwa2qiCp9sLOcchNi_D8YBrn9vSclwvXA7m7UAEVwOtErhOqjyZZ4nK5VxnJ0o/s320/teracopy.jpg" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+After a suggestion and a much needed push from <a href="https://twitter.com/phillmoore">Phill Moore</a>, I decided to create some SQL queries to decode the TeraCopy databases for Main (<a href="https://www.stark4n6.com/2018/11/teracopy-forensic-analysis-part-1.html">part 1</a>) and History (<a href="https://www.stark4n6.com/2018/11/teracopy-forensic-analysis-part-2.html">part 2</a>). I picked the most relevant columns that I deemed important from my research as some I could not get them to produce any results so I excluded them.<br />
+<br />
+You can download them both below:<br />
+<br />
+Main DB (<a href="https://pastebin.com/embed_js/ShS9sPqm">https://github.com/stark4n6/Forensic-SQL-Queries/blob/main/Other/TeraCopy_maindb.sql</a>)<br />
+<br />
+<script src="https://pastebin.com/embed_js/ShS9sPqm"></script>
+
+History DB (<a href="https://pastebin.com/dl/ArMuGmd2">https://github.com/stark4n6/Forensic-SQL-Queries/blob/main/Other/TeraCopy_history.sql</a>)<br />
+<br />
+<script src="https://pastebin.com/embed_js/ArMuGmd2"></script>
+

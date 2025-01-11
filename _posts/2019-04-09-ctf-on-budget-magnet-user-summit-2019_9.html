@@ -1,0 +1,157 @@
+---
+layout: post
+title: CTF on a Budget - Magnet User Summit 2019 (Part 2) - Mobile
+date: '2019-04-09T11:16:00.001-04:00'
+author: Kevin Pagano
+tags:
+- CTF
+- Magnet User Summit
+modified_time: '2020-09-11T09:33:11.490-04:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKOU3HkynIdYeNCUQjgMHg9LyaZx6feDE3HlF4Ug2Q03y-aygTqVQwFb78GtY2RI3Te4YMqD5NTwaHoFheu_q_H9zO70U6v3QB6zuxAQfq3gQ8N7MDBiEd2OHdPtpoqMrWUWrjvvBn66I/s72-c/Capture.PNG
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-7420250155053934123
+blogger_orig_url: https://www.stark4n6.com/2019/04/ctf-on-budget-magnet-user-summit-2019_9.html
+---
+
+<br />
+<br />
+<div style="text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKOU3HkynIdYeNCUQjgMHg9LyaZx6feDE3HlF4Ug2Q03y-aygTqVQwFb78GtY2RI3Te4YMqD5NTwaHoFheu_q_H9zO70U6v3QB6zuxAQfq3gQ8N7MDBiEd2OHdPtpoqMrWUWrjvvBn66I/s1600/Capture.PNG"><img border="0" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKOU3HkynIdYeNCUQjgMHg9LyaZx6feDE3HlF4Ug2Q03y-aygTqVQwFb78GtY2RI3Te4YMqD5NTwaHoFheu_q_H9zO70U6v3QB6zuxAQfq3gQ8N7MDBiEd2OHdPtpoqMrWUWrjvvBn66I/s1600/Capture.PNG" /></a></div>
+<br />
+<a href="https://www.stark4n6.com/2019/04/ctf-on-budget-magnet-user-summit-2019.html">Part 1 - Desktop</a><br />
+<br />
+For part 2, we will take a look at the mobile image and the Google Takeout data to solve more questions.<div><br /></div><span><a name='more'></a></span><div><br />
+<b><u><span style="font-size: large;">MOBILE</span></u></b><br />
+<br />
+<b><span style="font-size: large;">1. Image Type - What type of mobile image do you have?</span></b><br />
+<br />
+The file name of the zip export gives you a hint at to what type of image we are working with. It is a <span style="background-color: yellow;">Quick Image</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/-FUFNLC96eGijWMTH0ozm0U9mwY6AqwB_G0WjlePiGyWKuJnYn3Q904d78YjtvM5TIVsrZi8sVjLc7OL-Y4QFiGluITfxp_IGeJNFMfKvdcaPEutUzMevm4n_6eDZ0QQNf8TsiCo" /></div>
+<b><span style="font-size: large;">2. IMSI - What is the IMSI for the SIM Card?</span></b><br />
+<br />
+Under the Operating System &gt; Android Device Information field we can see the IMSI should be <span style="background-color: yellow;">311480460682294</span>.<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/VQb5Q5regWdz0sz_I8hNX3zuVAfSxPbIasWMTDCnF0jG8hgNbBi2cPBlYLcFMpluimre1nH9BkjlKMlHB6MbE91f-QX8lgoEeaKWYSL2MtzEGTW5UVY7n0uAW0mk_WTFl7CErolU" /></div>
+<br />
+<b><span style="font-size: large;">3. Basic Info - What is the phone number for the device in the format 2125551212?</span></b><br />
+<br />
+Another question that can be answered by looking at the Android Device Information, the phone number <span style="background-color: yellow;">3153165956</span>. <br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/8Gvtr_T5AWBvX4fi9YDML9FfKhYBB1xuRXPwg76wVtSwwtXok0RaYi7f_X5d78bwWPx2tUfPUk5btbwVvo13wchtCNLO5ymi1SiZZz8ZBHSg89W3iOLvJ3kvYIlu6FMTz59gqJw8" /></div>
+<br />
+<b><span style="font-size: large;">4. Google Search - Which Google search was made on the phone on Dec 4, 2018?</span></b><br />
+<br />
+For this we can look at the Cloud Google Activity and filter down to the date as well as the action as “Searched”. We see 3 results, but only one that matches any answers, so it is “iguana potty training”.<br />
+<img src="https://lh6.googleusercontent.com/DSgAfMhdHU0u7dLw-43q71nAWsP-IsbTR3zZjM4TnziZFaYMJrDohiG6uuxMo-OS-MEZyT3AWCX9EJYKl2qbfTRgmSoAhX10-_3dxdZIIGrLY9_6PkJG4CwMU9ZxWHw34xFPzzlS" /><br />
+<br />
+<b><span style="font-size: large;">5. User Name - What is mobile device owner’s username on Kik?</span></b><br />
+<br />
+<div>
+A quick keyword search for “Kik” brings up some SMS messages that show a user name of "<span style="background-color: yellow;">selmabspring</span>".<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/0CgyKFvwViWHYHt5StPPQeQ2_kRPw4_WmjEJ33vEFA6vFeqtjO7XdUlXm93WziDg1coQvwtisMW_MI_Jhy7qw_ZsojEfw_yo9TLg67mA-VLTlzNK3Qc-P7CeH6v9TR3Ic2RnOkFQ" /></div>
+<br />
+<b><span style="font-size: large;">6. Travel - What country was the mobile phone in on December 7th? </span></b><br />
+<br />
+A quick timeline analysis for the date brings up a SMS message from TravelPass that shows the user was in <span style="background-color: yellow;">Australia</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/AeaeT_Kdbc2_fZgjiXNGHpGB2CovxFx2LNVplIDI8fn7UZ-OOr2alImT8GuUDKxjdY2WvFLfSVc9sEBZY2X3lkJ6yWoHScqmQGsCKIHndBpZz43i5ccTwbX69jPb8-5El3IYoxwu" /></div>
+<br />
+<b><span style="font-size: large;">7. Pictures - What is the file name of the largest picture taken with the phone camera?</span></b><br />
+<br />
+This is fairly simple, we can go Media &gt; Pictures and then use the Make column to filter on “samsung”. We can then sort on size and get the picture name "<span style="background-color: yellow;">20181209_144014.jpg</span>".<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/Gg85aOeYrY4fD6szPthjLnOZCBYWUbcVLHufd2gKP7lcHGdP5FuIJM3ipSI-iPN_e8IiuYNKZb5EQlo9UqS_r_PKq0POTNK_eAFBGlQi77OIeXLNE_9IntKqmTVVX819z-BrPn0X" /></div>
+<br />
+<b><span style="font-size: large;">8. Email Address - What is the home email address for the user that is texted on Feb 13, 2019?</span></b><br />
+<br />
+Viewing the chat SMS messages, we only see one user was contacted on that day, Phoebe Washington. Under Identifiers, we can look at Phoebe’s contact information and see her home email address is <a href="mailto:phoeb5042002@icloud.com" style="background-color: yellow;">phoeb5042002@icloud.com</a>.<br />
+<div style="text-align: center;">
+<img src="https://lh5.googleusercontent.com/WrMhhP_IDFkj8HHxG99Gfiwp-_GOE194GiCAuEwhr34JbvxsYYC5Oy7xKd4rYEz38lcVwqUqbyi3aNmZWw2hBRPJlDg0CXxgoBX80DzP6gl83RZk3rB_OqsUBID0yFBCORdgCXIV" /></div>
+<br />
+<b><span style="font-size: large;">9. Invite - What email address sent the Mega invite?</span></b><br />
+<br />
+A quick keyword search for “Mega” leads us to an Gmail message in the Inbox showing that “<span style="background-color: yellow;">wdoobner@putinsangels.com</span>” sent the invite.<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/igBxMCegsgIDvEGH-XDq8T15hXagd8WwZpCWOdEtyIpegbm5v5oe5vzuW2cUtO_fjRK8AlCQDuiaGKhW9c6N23lpJ2VL36szRPVrzVYdgChXtEHQhDIni1todjE37qYzh_C4E9wR" /></div>
+<br />
+<b><span style="font-size: large;">10. Kik User Photo - Which imagery is part of the user’s kik avatar?</span></b><br />
+<br />
+A quick search for Kik pulls up a few media files associated with the Kik folder on the phone:<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/UmuwIFyO2tUGnlbVvmZWSCvFi6jMRLPwiQs2pN4pEnXzKBzg6irBBeZ6jKQZytgeCKreqMZ-agxQBv6MBtAyVqPI0z03EQVJwifr0tlTow8mluyfGY7Hs99n11fhPd5dVCext278" /></div>
+<br />
+This picture is a picture of a <span style="background-color: yellow;">penguin </span>swimming.<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/4IyZneuRJjrSjfq8zYg9xG_5Vek-P3saX9sipNl_YtiA7OrzI3U6uxvi11jDQs8c_Q_NgvjhVmpz8XNL6b4rYUltuhH2xXaqV1JYDNzW7KP1197j_vVYafWL7aJ2bPXDpSEYWoAp" /></div>
+<b><span style="font-size: large;">11. Domestic Travel - What state was the phone in on December 25th, 2018?</span></b><br />
+<br />
+Timeline analysis reveals that a few searches were performed:<br />
+<br />
+“Best tacos in orlando”<br />
+“Iguanas in orlando”<br />
+<br />
+We also see a picture was taken of Bubblebee Man’s Taco truck.<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/O6HTrGxb9WEnG2t1MJRI3nFXN18IfsqFwXitH48N420s-nl6w83xxBilHf2oz0LNxjA3GUjfcBjGbPhVNsxKM9rItY4XEUopqY9X79AaYpONCgo676RypHev0fPZXFugh8txM-aC" /></div>
+<br />
+A quick Google search reveals it to be in Orlando as well, so presumption and correct answer is <span style="background-color: yellow;">Florida</span>.<br />
+<br />
+<b><span style="font-size: large;">12. Theme Park - What theme park was the mobile device in on Dec 25, 2018?</span></b><br />
+<br />
+After getting the last question correct, this question pops up. Since we knew the user visited Bumblebee Man’s Taco truck, we can infer that they were at <span style="background-color: yellow;">Universal Studios</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/yxOATrn3IgxXoMNSZI7p5SmoV4I1gGpxUOi6rw164LV-20A2o39v2hXVP6R01aTXer2pTL1Ot2ujrReXLH9zO-5sgiE4e8U9GOdGqpCa1YDJ-EZsL14imji-rVh85A8Zb3ViG5Kn" /></div>
+<br />
+<b><span style="font-size: large;">13. App Download Methods - Which of the following apps was NOT downloaded from Google Play?</span></b><br />
+<br />
+This one was a little tough, the only thing I could tell was that the install dates for Facebook, Skype and Kik all aligned together:<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/ZOSSmWmEYwUxs_rRWI1il7mLmHVGdyPxABgjI8V0-Pun7vIQJ8DpEXXzPZFvk1eSLWr2mkNbJ3D0U8yhBYAqCRoWPv0fNsVZtfqQexJoJlIc_JMPp4OdXRP0hDsDHq3t3C2LYNQ9" /></div>
+<br />
+Where as for <span style="background-color: yellow;">YouTube</span> was installed around Samsung and Google default apps, which made me think it was installed from a base image and not through the Google Play store (which I was correct).<br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/-VzT-VEYVzYIt_9_VdfhfthHhfVkudI5HeoWJ9pgfeh52ayZGUHwp0rHSR1y6IMMWLwKiQTL-WOUSBhxDACRM6r_rlU0VPQDCaCYSZvaJKkIRW1YaQshdGfGbroZZPGzcTi9Lh2o" /></div>
+<br />
+<b><span style="font-size: large;">14. Timezone - What time zone was the phone in on Dec 9th?</span></b><br />
+<br />
+Using timeline analysis we see a bunch of pictures being taken on that day. An interesting clue that we see is the exif data for some.<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/bddHLpOCGPE6SPtEgayasUADX8xDw6bC-wUSQ92XkOdaByXCqmuixvxLp2ChzWmI1f6gm9Um86v-nKBO-IamzvYLFO5kOqMaTlvrOwIK7EgkO5G2-WE9-LKv0PNQ0UnImYsRKpAp" /></div>
+<br />
+We can see the created dates are a bit stomped but the Last Accessed compared to the Date/Time - Local Time is exactly 12 hours ahead. I looked to see what countries were in that zone and New Zealand fit the mold but that was on 12/4 so that couldn’t be the answer. I did see evidence of travel to Australia on 12/7. This was later confirmed by looking at the pictures taken on 12/9 more closely and seeing the Sydney Opera House in the background.<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/vYRMxxoL5aLhE0h3HgCX_oI7Qad18PXB0fXK8IhjsS0HKv0Azs_k1ByoA0z4E9op2ZUCgtR3H78IfKBtUVOVScI5IcYH18qsTrDqqh6gNcv-EjwAieKmy960X9DAkvBe_vVsBpaE" /></div>
+<br />
+Going off that I assumed we were set in <span style="background-color: yellow;">UTC+11</span>, which ended up being the answer.<br />
+<br />
+<b><span style="font-size: large;">15. What is the last name of the user whose email is pangolinsrock@outlook.com?</span></b><br />
+<br />
+A quick keyword search for the email address brings up the full name of the user, Bri <span style="background-color: yellow;">Frazier</span>.<br />
+<div style="text-align: center;">
+<img src="https://lh3.googleusercontent.com/2VsruZLQr1cbdtF48hpFXJOzIYEb75oNbbneG1WYk39JGqHrEszoP9ZadWzbk7XPjnk9YKcdqJdUJkk266nSCOe0jcFgR1qw9o72OdoDRRIpCicCBAANzwvSraMfVnxnmn36zcFi" /></div>
+<b><span style="font-size: large;">16. Content Distributor - What account posted the video that the mobile device visited on 4 Dec 2018 at 06:23 am UTC?</span></b><br />
+<br />
+Looking at the Cloud Google Activity for that day and time we see a YouTube video for “Iguana Taming” was watched with the URL. <br />
+<br />
+<div style="text-align: center;">
+<img src="https://lh6.googleusercontent.com/nZhHGOnzG5JfaBjXetHFFQ5G0zO7xfSbxB4mxINH5dPFeVy5Qc4zRJSv6uBlwjk_rph6rdGGs0w9_B5pIqUth7hdXPC8pipQjc6AKRBNOBIDX4XeoNAWrnV_mNTdaDZ7rKDGzPxh" /></div>
+<br />
+We can see that the account that published the video is <span style="background-color: yellow;">DesertedReptile98</span>.<br />
+<br />
+<b><span style="font-size: large;">17. Analysis - What country was the mobile device owner in when reading a document that was "IN MEMORY OF MOE"?</span></b><br />
+<br />
+I did a search for the phrase across the images with no results which removed any documents locally out of the equation. I need took a look at browser history to see if anything popped up. There weren’t many actual articles so didn’t take too long to stumble across <a href="http://www.iguanaresource.org/pottytraining.html">http://www.iguanaresource.org/pottytraining.html</a> (as absurd as that article is).<br />
+<br />
+Doing a date/time filter +-2 days, I was able to figure out that the user was in <span style="background-color: yellow;">New Zealand</span>, from an SMS message.<br />
+<div style="text-align: center;">
+<img src="https://lh4.googleusercontent.com/GEqk-7ZJLEqiStFdy9PdCVso2Yu0SK5WoC4_MEMvOjdXELdTk_UwOGsf-oNXUCZSEjT65py3na0lJe2Wwf0zwmK5Db1EN5DSYzOCFPy-NHSTyQ22h3DbJOJvjo-jfHRpT_tEvjii" /></div>
+<br />
+<b>18. BONUS: HOLY COW BATMAN! - Congratulations! While searching the mobile device you found a bitlocker password! Here it is:</b><br />
+<br />
+&lt;REDACTED&gt; I wasn’t just going to give you the password, finish the mobile section and get it yourself! (Or bribe me on <a href="http://twitter.com/KevinPagano3">Twitter</a>)</div>
+</div>

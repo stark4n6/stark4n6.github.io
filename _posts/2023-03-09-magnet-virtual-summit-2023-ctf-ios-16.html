@@ -1,0 +1,802 @@
+---
+layout: post
+title: Magnet Virtual Summit 2023 CTF - iOS 16 iPhone
+date: '2023-03-09T09:00:00.001-05:00'
+author: Kevin Pagano
+tags:
+- Magnet Forensics
+- iOS
+- Magnet Virtual Summit
+- iOS 16
+- iPhone
+modified_time: '2023-03-21T15:37:19.433-04:00'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIyGhYK1OhICDhBgMhbymi3_Yhbob2ePTHSpa3d6G4qWYe4JwUwYKDTKOpydzQjpk1-jP47LVi5mTIFUooZiYxkBSOWShs8ro1MUptuUcKcWXH6rrCoroToCc-YPBcDrXuBfBzdzi-IpO_BUBuYc2R8A-GLRnQqkk73OG6ksJyR5FOwqE47ZOedLCm/s72-w640-c-h336/ios-16-og.jpg
+blogger_id: tag:blogger.com,1999:blog-8693172355603666433.post-737463398730616669
+blogger_orig_url: https://www.stark4n6.com/2023/03/magnet-virtual-summit-2023-ctf-ios-16.html
+---
+
+<p>
+  &nbsp;<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIyGhYK1OhICDhBgMhbymi3_Yhbob2ePTHSpa3d6G4qWYe4JwUwYKDTKOpydzQjpk1-jP47LVi5mTIFUooZiYxkBSOWShs8ro1MUptuUcKcWXH6rrCoroToCc-YPBcDrXuBfBzdzi-IpO_BUBuYc2R8A-GLRnQqkk73OG6ksJyR5FOwqE47ZOedLCm/s1200/ios-16-og.jpg" style="margin-left: 1em; margin-right: 1em; text-align: center;"><img border="0" data-original-height="630" data-original-width="1200" height="336" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIyGhYK1OhICDhBgMhbymi3_Yhbob2ePTHSpa3d6G4qWYe4JwUwYKDTKOpydzQjpk1-jP47LVi5mTIFUooZiYxkBSOWShs8ro1MUptuUcKcWXH6rrCoroToCc-YPBcDrXuBfBzdzi-IpO_BUBuYc2R8A-GLRnQqkk73OG6ksJyR5FOwqE47ZOedLCm/w640-h336/ios-16-og.jpg" width="640" /></a>
+</p>
+<p>Previous: <a href="https://www.stark4n6.com/2023/03/magnet-virtual-summit-2023-ctf-windows.html">Windows 11</a> | <a href="https://www.stark4n6.com/2023/03/magnet-virtual-summit-2023-ctf-cipher.html">Cipher</a> | <a href="https://www.stark4n6.com/2023/03/magnet-virtual-summit-2023-ctf-windows_8.html">Windows Server</a></p><p>
+  Like last year's
+  <a href="https://www.stark4n6.com/2022/06/magnet-user-summit-2022-ctf-iphone.html">iOS 15 image</a>, we get one of the first full file system "test" images for iOS 16 publicly
+  available. Let's see what we get.
+</p>
+<p>Tools used:</p>
+<p></p>
+<ul style="text-align: left;">
+  <li><a href="https://github.com/abrignoni/iLEAPP">iLEAPP v1.18.4</a></li>
+  <li>
+    <a href="https://www.magnetforensics.com/products/magnet-axiom/">Magnet AXIOM v6.11</a>
+  </li>
+</ul>
+<div>Evidence:&nbsp;<a href="https://go.magnetforensics.com/e/52162/41A1130001E-files-full-001-zip/lhmdf2/1324250137?h=VjIef9nVy7wB1qONdAWbDcVEBzeNtFMM_Ou-e_OJSOw&amp;_gl=1*17863h4*_ga*MTMwNzI2NDgzMS4xNTkwNDQ2OTMz*_ga_YTB3MPRL03*MTY3OTQyNjg0Ny45NC4xLjE2Nzk0MjczNzguNDIuMC4w">00008101-0010541A1130001E_files_full-001.zip</a></div>
+<div>
+  <h2 style="text-align: left;">
+    <span style="color: red;">A few too many (5 points)</span>
+  </h2>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div style="text-align: left;">
+    How many email accounts did the user own? (not counting privaterelay)
+  </div>
+</blockquote>
+<div><br /></div>
+<div>
+  This one required a bit of correlation. Via the Refined Results &gt; User
+  Accounts artifact in AXIOM we can see 3 distinct email addresses:
+</div>
+<div>
+  <ul style="text-align: left;">
+    <li>blueisth3best@gmail.com</li>
+    <ul>
+      <li>pulled from Accounts3.sqlite / Apple Mail</li>
+    </ul>
+    <li>borchardtmichael78@gmail.com</li>
+    <ul>
+      <li>pulled from Chrome Login Data</li>
+    </ul>
+    <li>michaelkborchardt@proton.me</li>
+    <ul>
+      <li>pulled from Chrome Login Data</li>
+    </ul>
+  </ul>
+</div>
+<div>
+  <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioQQntyvwgsQSWiKPOrAvcffDt2cAxxjCnQwoZ8DpMCkbAfO3m7a31To3j0PFeZML_QQRIhopKsJRjDeCvMys0dT6e8N5gGJAa27cwtuOeWO3L_9XIR4GEE8o4AyKLt27p200pQ8KYW73gjKJp4S5nUrQKLmDrtP6OHS-2U5Q4juM5zw5JIeBpgZsd/s724/accounts.png" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="225" data-original-width="724" height="198" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioQQntyvwgsQSWiKPOrAvcffDt2cAxxjCnQwoZ8DpMCkbAfO3m7a31To3j0PFeZML_QQRIhopKsJRjDeCvMys0dT6e8N5gGJAa27cwtuOeWO3L_9XIR4GEE8o4AyKLt27p200pQ8KYW73gjKJp4S5nUrQKLmDrtP6OHS-2U5Q4juM5zw5JIeBpgZsd/w640-h198/accounts.png" width="640" /></a>
+  </div>
+  <div class="separator" style="clear: both; text-align: center;">
+    <b><i>Figure 1: User Accounts via AXIOM</i></b>
+  </div>
+  <div class="separator" style="clear: both; text-align: center;"><br /></div>
+  <div class="separator" style="clear: both; text-align: left;">
+    What we also need to account for is other communication methods too. Slack
+    was installed on the phone and if we check the Slack Accounts artifact we
+    see we get yet another different email address.
+  </div>
+  <div class="separator" style="clear: both; text-align: center;"><br /></div>
+  <div class="separator" style="clear: both; text-align: center;">
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEia69oIXwZeXWff8ECN-QEp5Is-PfF-xTbq4T0zMvPpCO8NeZaGnndVkcoqemM-gBU4AS-sDVRWfFfr_K5OrZgnFdDL1r4uy3RY7IxskSoYf-hdkSg90vPkcLWH-2puGycLYmja_fU1ZMenOeUHqGWRJS-qJmhDOvkWyqPZuaK6r8Mq_XMYHnHHVt1w/s629/slack.png" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="382" data-original-width="629" height="389" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEia69oIXwZeXWff8ECN-QEp5Is-PfF-xTbq4T0zMvPpCO8NeZaGnndVkcoqemM-gBU4AS-sDVRWfFfr_K5OrZgnFdDL1r4uy3RY7IxskSoYf-hdkSg90vPkcLWH-2puGycLYmja_fU1ZMenOeUHqGWRJS-qJmhDOvkWyqPZuaK6r8Mq_XMYHnHHVt1w/w640-h389/slack.png" width="640" /></a>
+  </div>
+  <div class="separator" style="clear: both; text-align: center;">
+    <b><i>Figure 2: Slack Account details via AXIOM</i></b>
+  </div>
+  <div class="separator" style="clear: both; text-align: center;"><br /></div>
+  <div class="separator" style="clear: both; text-align: left;">
+    So in total we have <span style="background-color: red;">4</span> different
+    email accounts from the owner of the phone.
+  </div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <h2 style="clear: both; text-align: left;">
+      <span style="color: red;">autoFill me in on the deets (5 points)</span>
+    </h2>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: left;">
+          Which email, other than their own, was autofilled in Chrome?
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;"><br /></div>
+      <div class="separator" style="clear: both;">
+        Heading over to the Chrome Autofill again, we can see only one other
+        email address that didn't belong to Michael Borchardt, and that was
+        <span style="background-color: red;">tlouis@kurvalis.com</span>.
+      </div>
+      <div class="separator" style="clear: both;"><br /></div>
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: center;">
+          <a href="https://blogger.googleusercontent.com/img/a/AVvXsEj9aV03CItQX3e73dv0QNFUTSVXXfzDZ5UDBoGLoU9n-uF40nSfQdNi95DrttA7vbutJFPsof2CwpQFrKnKEvLHrjEWiXSjM2JJOx4AsKmwcnjtQcJ8wPc0F2OK8azYtF693J_tOfcwVC4lmADvSM2-lTP6-3NDUXehLw4ssjlnpfG-Xr0P3VFhlZlL" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="308" data-original-width="657" height="300" src="https://blogger.googleusercontent.com/img/a/AVvXsEj9aV03CItQX3e73dv0QNFUTSVXXfzDZ5UDBoGLoU9n-uF40nSfQdNi95DrttA7vbutJFPsof2CwpQFrKnKEvLHrjEWiXSjM2JJOx4AsKmwcnjtQcJ8wPc0F2OK8azYtF693J_tOfcwVC4lmADvSM2-lTP6-3NDUXehLw4ssjlnpfG-Xr0P3VFhlZlL=w640-h300" width="640" /></a>
+        </div>
+        <div class="separator" style="clear: both; text-align: center;">
+          <b><i>Figure 3: Chrome Autofill in AXIOM</i></b>
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <h2 style="clear: both; text-align: left;">
+            <span style="color: red;">1 fish 2 fish, red fish blue fish (5 points)</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div class="separator" style="clear: both;">
+              <div class="separator" style="clear: both; text-align: left;">
+                According to the user's email accounts, what is his favorite
+                color?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: left;">
+          <div class="separator" style="clear: both;">
+            <div class="separator" style="clear: both;"><br /></div>
+          </div>
+          <div class="separator" style="clear: both;">
+            I way overlooked this one originally, just don't make it too
+            complicated. Michael's iCloud email address was
+            blueisth3best@icloud.com, his favorite color is
+            <span style="background-color: red;">blue</span>. It's littered all
+            over the Account Data.
+          </div>
+          <div class="separator" style="clear: both;"><br /></div>
+          <div class="separator" style="clear: both;">
+            <div class="separator" style="clear: both; text-align: center;">
+              <a href="https://blogger.googleusercontent.com/img/a/AVvXsEhMJ8bTUc0KRP30wgufYQ9kkzx56-0Sc5-QJDFvwDJBbt5uJz8PgDhVM2KKkiW5Qb9cOIXl25IYIGqY2iooAoZhqUqx3LJ7pP9qb4k5Grvc0VMRx5KYl9YWWlxosohHAEDnNAygKuRS34q_J7mYE5bzil5X8sEvkAs-u1SwtUIdlScaaSQ8NTPE7pbe" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="742" data-original-width="935" height="509" src="https://blogger.googleusercontent.com/img/a/AVvXsEhMJ8bTUc0KRP30wgufYQ9kkzx56-0Sc5-QJDFvwDJBbt5uJz8PgDhVM2KKkiW5Qb9cOIXl25IYIGqY2iooAoZhqUqx3LJ7pP9qb4k5Grvc0VMRx5KYl9YWWlxosohHAEDnNAygKuRS34q_J7mYE5bzil5X8sEvkAs-u1SwtUIdlScaaSQ8NTPE7pbe=w640-h509" width="640" /></a>
+            </div>
+            <div class="separator" style="clear: both; text-align: center;">
+              <i><b>Figure 4: Account Data report in iLEAPP</b></i>
+            </div>
+            <h2 style="clear: both; text-align: left;">
+              <span style="color: red;">Q-uestion (5 points)</span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div class="separator" style="clear: both;">
+              <div class="separator" style="clear: both;">
+                <div class="separator" style="clear: both; text-align: left;">
+                  What Chinese networking website was associated with Linkedin?
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: left;">
+          <div class="separator" style="clear: both;">
+            <div class="separator" style="clear: both;">
+              <div class="separator" style="clear: both;"><br /></div>
+              <div class="separator" style="clear: both;">
+                I first did a keyword search on LinkedIn to narrow down the
+                scope to hopefully have a quick win in a path or something. My
+                first thought was to go directly to
+                <a href="https://en.wikipedia.org/wiki/Tencent_QQ">QQ Chat</a>
+                which appeared to be partially correct. Carved from potential
+                browser activity was a URL for QQ.
+              </div>
+            </div>
+            <div><br /></div>
+          </div>
+        </div>
+        <div class="separator" style="clear: both; text-align: center;">
+          <a href="https://blogger.googleusercontent.com/img/a/AVvXsEiguaTD9Q08G3uXAMOHzagE1ev5InbujdY-AQHalzEa0vkL3PTeFngPJduhyV230Odxw9InW5EFf1CWI97oxIRt_R2RDX50h85gWWUQCdQcbMVIFFRdq467bOUgnAodA-Td5VuPoW0FDhDLTZdgiP1uWmsdH4O8YYApxaZpRp6tYlL9F66uSbK7PKnS" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="385" data-original-width="615" height="400" src="https://blogger.googleusercontent.com/img/a/AVvXsEiguaTD9Q08G3uXAMOHzagE1ev5InbujdY-AQHalzEa0vkL3PTeFngPJduhyV230Odxw9InW5EFf1CWI97oxIRt_R2RDX50h85gWWUQCdQcbMVIFFRdq467bOUgnAodA-Td5VuPoW0FDhDLTZdgiP1uWmsdH4O8YYApxaZpRp6tYlL9F66uSbK7PKnS=w640-h400" width="640" /></a>
+        </div>
+        <div class="separator" style="clear: both; text-align: center;">
+          <b><i>Figure 5: Potential Browser Activity for LinkedIn related
+              sites</i></b>
+        </div>
+        <div class="separator" style="clear: both; text-align: center;">
+          <b><i><br /></i></b>
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          QQ didn't work but
+          <span style="background-color: red;">QZone</span> took. As you can see
+          it's being pulled from the LinkedIn application folder location.
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <h2 style="clear: both; text-align: left;">
+            <span style="color: red;">Chef Boyardee 2.0 (10 points)</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div class="separator" style="clear: both;">
+              <div class="separator" style="clear: both; text-align: left;">
+                At which market was the user viewing Chef Pasquale tomato sauce?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: left;">
+          <div><br /></div>
+        </div>
+        The first thing I gravitated to was to look at the DCIM folder for the
+        user's images. Filtering for the folder and hitting the Pictures
+        artifact, we can see a few different pictures of grocery store shelves
+        with cans and bottles but one specifically fits the description.
+      </div>
+      <div class="separator" style="clear: both;"><br /></div>
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: center;">
+          <a href="https://blogger.googleusercontent.com/img/a/AVvXsEjV_lkem4pIxGUq056wNn4N3gGxuPDEWCm0QfBRRx2hmEDhyPUHDGa-5wcz8DQl7HgHlSiXcSciITxW0qH2deOOxPDMPHr73jzTIr82W8JrblgEo1pB1gFViZqONFP5jwJ74L39wwghbcQ_8o00h0aUw9uM32Z4OSpe1JWw8s4n7dbjwFu16zRevKMp" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="616" data-original-width="545" height="640" src="https://blogger.googleusercontent.com/img/a/AVvXsEjV_lkem4pIxGUq056wNn4N3gGxuPDEWCm0QfBRRx2hmEDhyPUHDGa-5wcz8DQl7HgHlSiXcSciITxW0qH2deOOxPDMPHr73jzTIr82W8JrblgEo1pB1gFViZqONFP5jwJ74L39wwghbcQ_8o00h0aUw9uM32Z4OSpe1JWw8s4n7dbjwFu16zRevKMp=w565-h640" width="565" /></a>
+        </div>
+        <div class="separator" style="clear: both; text-align: center;">
+          <b><i>Figure 6: Pasquale's tomato sauce from DCIM</i></b>
+        </div>
+        <div class="separator" style="clear: both; text-align: center;">
+          <br />
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          We can see 3 different varieties from Chef Pasquale. Looking at the
+          EXIF data of the image we get the latitude and longitude of where the
+          picture was taken.
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <br />
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <div class="separator" style="clear: both; text-align: center;">
+            <a href="https://blogger.googleusercontent.com/img/a/AVvXsEga0ZSVZdpoVvWNNnxVbnqmIhLZ5uYddlAxjEowfD6i8vsT_hUgckEjWJDx3dPKp-noCcuBtHTwWbr2hc8tbZFlCVKl3gzvvFR19mzmZXn6wXdBwutLMpU0qnjifkFJCl1xnQBwkpcsgP12KUvAHDRBrJTgpySHRW9WJdCF09ETTP4FoAhlDccvwsDe" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="984" data-original-width="627" src="https://blogger.googleusercontent.com/img/a/AVvXsEga0ZSVZdpoVvWNNnxVbnqmIhLZ5uYddlAxjEowfD6i8vsT_hUgckEjWJDx3dPKp-noCcuBtHTwWbr2hc8tbZFlCVKl3gzvvFR19mzmZXn6wXdBwutLMpU0qnjifkFJCl1xnQBwkpcsgP12KUvAHDRBrJTgpySHRW9WJdCF09ETTP4FoAhlDccvwsDe=s16000" /></a>
+          </div>
+          <div class="separator" style="clear: both; text-align: center;">
+            <b><i>Figure 7: Image EXIF via AXIOM</i></b>
+          </div>
+          <br />Plugging in the coordinates in Google Maps, we can see that it's
+          roughly nearby the
+          <span style="background-color: red;">Marche Atwater</span> market.
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <br />
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <div class="separator" style="clear: both; text-align: center;">
+            <a href="https://blogger.googleusercontent.com/img/a/AVvXsEgDx17PTfRnB8RFEImL63wGG5jsIBx6Xkv7OjSOwKus4f7cMi5wnmPDZnnvtPLpriJTY2eL7_fy5XiqVAJXZMV4AiyN7ZAGKD_lwjAAx74Oi9FGvSZ-2RtaDnsH_dsbB588mQd0j0rrwx8dX-ZtBT2NmfVHIckoxvEDXlT81a54wsS0H-TZ_EWoPwJu" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="587" data-original-width="1452" height="258" src="https://blogger.googleusercontent.com/img/a/AVvXsEgDx17PTfRnB8RFEImL63wGG5jsIBx6Xkv7OjSOwKus4f7cMi5wnmPDZnnvtPLpriJTY2eL7_fy5XiqVAJXZMV4AiyN7ZAGKD_lwjAAx74Oi9FGvSZ-2RtaDnsH_dsbB588mQd0j0rrwx8dX-ZtBT2NmfVHIckoxvEDXlT81a54wsS0H-TZ_EWoPwJu=w640-h258" width="640" /></a>
+          </div>
+          <div class="separator" style="clear: both; text-align: center;">
+            <b><i>Figure 8: Google Maps using EXIF image data coordinates</i></b>
+          </div>
+          <h2 style="clear: both; text-align: left;">
+            <span style="color: red;">Staying Stylish! (10 points)</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div style="text-align: left;">
+              What color shirt did the user choose to put their snapchat bitmoji
+              in?
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;">
+        <br />Via the Snapchat Chat Messages we can get the user's account name
+        as the recipient of messages sent from Team Snapchat. It was
+        "m_b227468".
+      </div>
+      <div class="separator" style="clear: both;"><br /></div>
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: center;">
+          <a href="https://blogger.googleusercontent.com/img/a/AVvXsEjXRNRsc_uMTuE62uWzmbfV8kBVJqSUZH08ieF15UWqFtXntuwyZ2JsYXKNQ64Dfr6x8f7omVIHia0z1zU1b46V-_XKfIlsGP1MWjc7AQPZ-YE724iTK0WrEgBCKCv022ZL0BSa3c6mvGWNvN1Y822TYlFS8H8S5zNjU7D8YkcWnPvZf9h4dpvtVRGo" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="358" data-original-width="629" height="364" src="https://blogger.googleusercontent.com/img/a/AVvXsEjXRNRsc_uMTuE62uWzmbfV8kBVJqSUZH08ieF15UWqFtXntuwyZ2JsYXKNQ64Dfr6x8f7omVIHia0z1zU1b46V-_XKfIlsGP1MWjc7AQPZ-YE724iTK0WrEgBCKCv022ZL0BSa3c6mvGWNvN1Y822TYlFS8H8S5zNjU7D8YkcWnPvZf9h4dpvtVRGo=w640-h364" width="640" /></a>
+        </div>
+        <div class="separator" style="clear: both; text-align: center;">
+          <b><i>Figure 9: Snapchat Recipient details</i></b>
+        </div>
+        <div class="separator" style="clear: both; text-align: center;">
+          <br />
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          Using that info I just utilized my own personal phone to look up the
+          user account and check the avatar image. You can see the current shirt
+          was <span style="background-color: red;">green</span>, so I tried that
+          and it worked.
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <br />
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <div class="separator" style="clear: both; text-align: center;">
+            <a href="https://blogger.googleusercontent.com/img/a/AVvXsEhpG1vrfvpRbxi4g__a0GPy-DAiNQGWVJKiT3TdlOqbXjwJuJac7IY4MJ3LzoV2YaDGN1jrkpejRsdq609K27aXQHCLgjSG1o5YZlAoPCogZk1pc8zrTw-mbgq_S14VANjlbl-KshPZcYXlldT_z6HzWTsZr6vyvIsyP19dfDN1Ek4QxcVqLoXho6xm" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="2397" data-original-width="1440" height="640" src="https://blogger.googleusercontent.com/img/a/AVvXsEhpG1vrfvpRbxi4g__a0GPy-DAiNQGWVJKiT3TdlOqbXjwJuJac7IY4MJ3LzoV2YaDGN1jrkpejRsdq609K27aXQHCLgjSG1o5YZlAoPCogZk1pc8zrTw-mbgq_S14VANjlbl-KshPZcYXlldT_z6HzWTsZr6vyvIsyP19dfDN1Ek4QxcVqLoXho6xm=w384-h640" width="384" /></a>
+          </div>
+          <div class="separator" style="clear: both; text-align: center;">
+            <b><i>Figure 10: m_b227468 Snapchat avatar</i></b>
+          </div>
+          <div class="separator" style="clear: both; text-align: left;">
+            <br />
+          </div>
+          To verify that it was correct, I did a keyword search for "bitmoji"
+          and looked at images to see if the same avatar popped up. Sure enough,
+          at the following path was the same outfit:
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <br />
+        </div>
+        <div class="separator" style="clear: both; text-align: center;">
+          <span style="color: red; font-family: courier;">private\var\mobile\Containers\Shared\AppGroup\F6809526-E8EE-4E16-8077-88B9A3B98C21\User\044aebd1-8c6d-48d9-976b-61574a1519bf\camera-lock-screen-widget\camera-lock-screen-widget-bitmoji</span>
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <br />
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <div class="separator" style="clear: both; text-align: center;">
+            <a href="https://blogger.googleusercontent.com/img/a/AVvXsEiu8_eefbij4uZlmBSR0gcKdxRS6IUKNEai7iah3csTE8T_Sen04tEa67dGZL4vfzj9zeyBAmP6KZADYxzxCekk8rFSh0YDD9vIsPp8L0eBA0k4UedGHIG0jPf9VFD-NibBmn1wSo5tjhLro5UwtPPP6lfu-eu6HucWJOhuzg8Ad2fUcSew032eYWgj" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="972" data-original-width="633" height="640" src="https://blogger.googleusercontent.com/img/a/AVvXsEiu8_eefbij4uZlmBSR0gcKdxRS6IUKNEai7iah3csTE8T_Sen04tEa67dGZL4vfzj9zeyBAmP6KZADYxzxCekk8rFSh0YDD9vIsPp8L0eBA0k4UedGHIG0jPf9VFD-NibBmn1wSo5tjhLro5UwtPPP6lfu-eu6HucWJOhuzg8Ad2fUcSew032eYWgj=w416-h640" width="416" /></a>
+          </div>
+          <div class="separator" style="clear: both; text-align: center;">
+            <b><i>Figure 11: Snapchat Bitmoji</i></b>
+          </div>
+          <div class="separator" style="clear: both; text-align: left;">
+            <h2 style="clear: both; text-align: left;">
+              <span style="color: red;">Picking up Steam (10 points)</span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div class="separator" style="clear: both; text-align: left;">
+              <div>
+                <div style="text-align: left;">
+                  What server was the user interested in making?
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: left;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div>
+              <div><br /></div>
+            </div>
+            <div>
+              A keyword search for "server" yielded quick results found in
+              Google Searches and in Discord chat messages. He was looking to
+              set up a <span style="background-color: red;">CSGO</span> server.
+            </div>
+            <div><br /></div>
+            <div>
+              <div class="separator" style="clear: both; text-align: center;">
+                <a href="https://blogger.googleusercontent.com/img/a/AVvXsEgLXmVjo4q_2DjiBXhTdfBHQffV2JIdXWPTVHQlMqP7S3h8E_u4cVA6LBv2uXBI9zY8crlETXRlhKEdZCJr0Vb4S-MakTr_LiINVYr33TQ_-NEjHqQKNVxs-w5Vp8tUxfR2JSU60loPM7sbOd5guTc1q6qvA55CUvp6A-5E0zH-k1VXgux5-1_1w9jm" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="661" data-original-width="654" height="640" src="https://blogger.googleusercontent.com/img/a/AVvXsEgLXmVjo4q_2DjiBXhTdfBHQffV2JIdXWPTVHQlMqP7S3h8E_u4cVA6LBv2uXBI9zY8crlETXRlhKEdZCJr0Vb4S-MakTr_LiINVYr33TQ_-NEjHqQKNVxs-w5Vp8tUxfR2JSU60loPM7sbOd5guTc1q6qvA55CUvp6A-5E0zH-k1VXgux5-1_1w9jm=w632-h640" width="632" /></a>
+              </div>
+              <div class="separator" style="clear: both; text-align: center;">
+                <b><i>Figure 12: Discord chats via iLEAPP</i></b>
+              </div>
+              <div class="separator" style="clear: both; text-align: center;">
+                <br />
+              </div>
+              <div class="separator" style="clear: both; text-align: center;">
+                <div class="separator" style="clear: both; text-align: center;">
+                  <a href="https://blogger.googleusercontent.com/img/a/AVvXsEg23gYvto02bLFdg4Lrno48e_5Q11FzBjYCrX4s345cdqPikc9c3rCoALiJKMUqatUCvOLFHs5Wvha4JiVoQuVxQnsgAPIeJmy5r5_3qlCtks-17ndiRVPEeSI_lsJQx-_bKWe5Urge7tSID9hEmn4-NaoEaE7Hm3V0rOe3mMO6QifqVR4aG1TrMwbR" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="336" data-original-width="618" height="348" src="https://blogger.googleusercontent.com/img/a/AVvXsEg23gYvto02bLFdg4Lrno48e_5Q11FzBjYCrX4s345cdqPikc9c3rCoALiJKMUqatUCvOLFHs5Wvha4JiVoQuVxQnsgAPIeJmy5r5_3qlCtks-17ndiRVPEeSI_lsJQx-_bKWe5Urge7tSID9hEmn4-NaoEaE7Hm3V0rOe3mMO6QifqVR4aG1TrMwbR=w640-h348" width="640" /></a>
+                </div>
+                <div class="separator" style="clear: both; text-align: center;">
+                  <b><i>Figure 13: Google Search from Biome via AXIOM</i></b>
+                </div>
+                <div style="text-align: left;">
+                  <h2 style="text-align: left;">
+                    <span style="color: red;">Overlooking Excellence (10 points)</span>
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div class="separator" style="clear: both; text-align: left;">
+              <div>
+                <div class="separator" style="clear: both; text-align: center;">
+                  <div style="text-align: left;">
+                    <div>
+                      <div style="text-align: left;">
+                        What Sports stadium was the user overlooking at
+                        Camilien-Houde belvedere?
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: left;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div class="separator" style="clear: both; text-align: center;">
+              <div style="text-align: left;">
+                <div>
+                  <div><br /></div>
+                </div>
+                <div>
+                  I originally just did a Google Maps search for "Camilien-Houde
+                  belvedere" and tried as many names as I could find around the
+                  area on the map but nothing worked. I then pivoted to the DCIM
+                  images because from previous questions I remember seeing some
+                  hiking views. There were a few with some signage but one stuck
+                  out.
+                </div>
+                <div><br /></div>
+              </div>
+            </div>
+            <div style="text-align: center;">
+              <span style="color: red; font-family: courier;">00008101-0010541A1130001E_files_full-001.zip\private\var\mobile\Media\DCIM\100APPLE\IMG_0024.HEIC</span>
+            </div>
+            <br />
+          </div>
+          Zooming in on the photo we can see a marker for
+          <span style="background-color: red;">Stade olympique</span>.
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <br />
+        </div>
+        <div class="separator" style="clear: both; text-align: left;">
+          <div class="separator" style="clear: both; text-align: center;">
+            <a href="https://blogger.googleusercontent.com/img/a/AVvXsEisnR2UIPHsErM2OMaVrHdoFjAmFJMHoXoPg9YNtiby8xKRNMHIhJSDO0CYuCnaKFYomp5JS2nh4uNAMr9QMbhw_6LoNyF-XN3B1ZhjZbgA68Fl51taxeNthWWijRTvR9jdnHMlb0He3RpI2NWKe3yeP6hveFQMT0mIGOT7fzWcCkYKl0CekGwFwc5i" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="780" data-original-width="1426" src="https://blogger.googleusercontent.com/img/a/AVvXsEisnR2UIPHsErM2OMaVrHdoFjAmFJMHoXoPg9YNtiby8xKRNMHIhJSDO0CYuCnaKFYomp5JS2nh4uNAMr9QMbhw_6LoNyF-XN3B1ZhjZbgA68Fl51taxeNthWWijRTvR9jdnHMlb0He3RpI2NWKe3yeP6hveFQMT0mIGOT7fzWcCkYKl0CekGwFwc5i=s16000" /></a>
+          </div>
+          <div class="separator" style="clear: both; text-align: center;">
+            <b><i>Figure 14: DCIM image overlooking Montreal</i></b>
+          </div>
+          <h2 style="clear: both; text-align: left;">
+            <span style="color: red;">You're going to crush this one! (10 points)</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div>
+              <div style="text-align: left;">
+                What light-hearted game did the user spend the most time on?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: left;">
+          <div><br /></div>
+          <div>
+            One of the first things I look at when assessing a mobile device is
+            the installed applications so I knew this one almost instantly. It
+            helped the question title kind of gave it away too, it was
+            <span style="background-color: red;">Candy Crush</span>.
+          </div>
+          <div><br /></div>
+          <div>
+            <div class="separator" style="clear: both; text-align: center;">
+              <a href="https://blogger.googleusercontent.com/img/a/AVvXsEjCMmbo6Y6S6H1GNVGgNB6uSCgHkD_upx3zkMPAaY4g1beSO0bf_I9OXq92T3xHInlJkG9_UrPyJZ3gUX5oRoMz_m1imkmXxHmVyNN6365C3j-_C6aYSQlQBlT8kaL-7bDm29eB0cjJaJsWlhL_C5CE4xAw3N7CeF-AWGVG9gM9frJ5pPp3AwJlhGbt" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="439" data-original-width="717" height="392" src="https://blogger.googleusercontent.com/img/a/AVvXsEjCMmbo6Y6S6H1GNVGgNB6uSCgHkD_upx3zkMPAaY4g1beSO0bf_I9OXq92T3xHInlJkG9_UrPyJZ3gUX5oRoMz_m1imkmXxHmVyNN6365C3j-_C6aYSQlQBlT8kaL-7bDm29eB0cjJaJsWlhL_C5CE4xAw3N7CeF-AWGVG9gM9frJ5pPp3AwJlhGbt=w640-h392" width="640" /></a>
+            </div>
+            <div class="separator" style="clear: both; text-align: center;">
+              <b><i>Figure 15: Installed Apps report via iLEAPP</i></b>
+            </div>
+            <div class="separator" style="clear: both; text-align: left;">
+              <h2 style="clear: both; text-align: left;">
+                <span style="color: red;">You are here (15 points)</span>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div>
+              <div class="separator" style="clear: both; text-align: left;">
+                <div>
+                  <div style="text-align: left;">
+                    Which airline lounge was viewed?
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: left;">
+          <div>
+            <div class="separator" style="clear: both; text-align: left;">
+              <div>
+                <div><br /></div>
+                <div>
+                  If you don't know what Biomes are read
+                  <a href="https://blog.d204n6.com/2022/09/ios-16-now-you-c-it-now-you-dont.html">Chris Vance's series</a>, they're the new hotness for iOS, basically replacing
+                  KnowledgeC artifacts. Anywho, back to reality. A quick keyword
+                  search for "lounge" led me to entries in the Biome User
+                  Activity that showed the answer,&nbsp;<span style="background-color: #fcff01;">Lufthansa</span>.
+                </div>
+              </div>
+              <div><br /></div>
+              <div>
+                <div class="separator" style="clear: both; text-align: center;">
+                  <a href="https://blogger.googleusercontent.com/img/a/AVvXsEhEm7z1BXpFK4t8_-x0EmdvMoZpy0-n152kpYBwa7Z7jQ9F1AblwBNDKsXuzjVj9lkFq9lbHLD0IdoshZ-VpR64fJtQp0vAiYpC4JYEdHBESEC3EKGrT6nl5zdUq1eCigUZHtM89z8VQTZy1NrfluRaEaBxyT5UOqoqCnMOyJW-RuCXFVEPk06T78mT" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="187" data-original-width="457" height="262" src="https://blogger.googleusercontent.com/img/a/AVvXsEhEm7z1BXpFK4t8_-x0EmdvMoZpy0-n152kpYBwa7Z7jQ9F1AblwBNDKsXuzjVj9lkFq9lbHLD0IdoshZ-VpR64fJtQp0vAiYpC4JYEdHBESEC3EKGrT6nl5zdUq1eCigUZHtM89z8VQTZy1NrfluRaEaBxyT5UOqoqCnMOyJW-RuCXFVEPk06T78mT=w640-h262" width="640" /></a>
+                </div>
+                <div class="separator" style="clear: both; text-align: center;">
+                  <b><i>Figure 16: Biome User Activity via AXIOM</i></b>
+                </div>
+                <div class="separator" style="clear: both; text-align: left;">
+                  <h2 style="clear: both; text-align: left;">
+                    <span style="color: red;">Out of this world (25 points)</span>
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div>
+              <div class="separator" style="clear: both; text-align: left;">
+                <div>
+                  <div class="separator" style="clear: both; text-align: left;">
+                    <div>
+                      <div style="text-align: left;">
+                        Which terms and conditions site on Tik Tok is named
+                        after a space formation?
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: left;">
+          <div>
+            <div class="separator" style="clear: both; text-align: left;">
+              <div class="separator" style="clear: both; text-align: left;">
+                <div><br /></div>
+                <div>
+                  This one drove me absolutely crazy. I dug on the Tik Tok
+                  website but didn't see anything so I went back to the evidence
+                  and just did a keyword search for "tiktok" and "Tik Tok". Doom
+                  scrolling through the WebKit carved history I found the answer
+                  was "<span style="background-color: red;">nebula</span>" which
+                  was of what looks like a URL for advertising T&amp;C.
+                </div>
+                <div><br /></div>
+                <div>
+                  <div class="separator" style="clear: both; text-align: center;">
+                    <a href="https://blogger.googleusercontent.com/img/a/AVvXsEhp0tttO6S2SZFd8UieUi2fkYZqGLZfUK403oLYxnGCTrL7MsQZyIYyQzVsCT9ahb1yn28F5lje6KQiIUjFTcY_5OLi7PCWSppGW1lAGzpsyvTFdR9ze0xMdVZ3vxhvNg7X_QruENCTP_6tXwmIDsF8-_T2rsJMXMun-P3Qk1KBa_3EFD9aRUUuJ1p3" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="387" data-original-width="617" height="402" src="https://blogger.googleusercontent.com/img/a/AVvXsEhp0tttO6S2SZFd8UieUi2fkYZqGLZfUK403oLYxnGCTrL7MsQZyIYyQzVsCT9ahb1yn28F5lje6KQiIUjFTcY_5OLi7PCWSppGW1lAGzpsyvTFdR9ze0xMdVZ3vxhvNg7X_QruENCTP_6tXwmIDsF8-_T2rsJMXMun-P3Qk1KBa_3EFD9aRUUuJ1p3=w640-h402" width="640" /></a>
+                  </div>
+                  <div class="separator" style="clear: both; text-align: center;">
+                    <b><i>Figure 17: TikTok WebKit cared web history via AXIOM</i></b>
+                  </div>
+                  <div class="separator" style="clear: both; text-align: left;">
+                    <h2 style="clear: both; text-align: left;">
+                      <span style="color: red;">Which way? (25 points)</span>
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;">
+  <div>
+    <div class="separator" style="clear: both; text-align: left;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both;">
+          <div class="separator" style="clear: both; text-align: left;">
+            <div>
+              <div class="separator" style="clear: both; text-align: left;">
+                <div class="separator" style="clear: both; text-align: left;">
+                  <div>
+                    <div class="separator" style="clear: both; text-align: left;">
+                      <div>
+                        <div style="text-align: left;">
+                          Which cardinal direction was the user turning when
+                          driving towards RHEINFAHRE?
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+<div>
+  <div class="separator" style="clear: both; text-align: left;">
+    <div class="separator" style="clear: both;">
+      <div class="separator" style="clear: both;">
+        <div class="separator" style="clear: both; text-align: left;">
+          <div>
+            <div class="separator" style="clear: both; text-align: left;">
+              <div class="separator" style="clear: both; text-align: left;">
+                <div class="separator" style="clear: both; text-align: left;">
+                  <div><br /></div>
+                  <div>
+                    Knowing from past CTFs with cardinal directional questions,
+                    I had to go directly to the Live Photos. Clicking through
+                    one picture of some sort of overpass bridge had the named
+                    RHEINFAHRE on it so it was definitely the one to look at
+                    further.
+                  </div>
+                  <div><br /></div>
+                  <div>
+                    <div class="separator" style="clear: both; text-align: center;">
+                      <a href="https://blogger.googleusercontent.com/img/a/AVvXsEjDyFVYD9Ua1EriDzNI_zN817kFCclkz8CRLf3qXVBgqu0lxuozsszdidzt1Y1zQmjSUPQSDi4RD105VdAK1ly3Utcmxi42LubkE1dyOUGgKCDcwgESdOBX5Nc2XTl9usHJqjWUFXrKDm_kVAmv_gfaS_tjltcnYFkpl_1T512TU4Hl1i7RCMOnmSM0" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="952" data-original-width="586" height="640" src="https://blogger.googleusercontent.com/img/a/AVvXsEjDyFVYD9Ua1EriDzNI_zN817kFCclkz8CRLf3qXVBgqu0lxuozsszdidzt1Y1zQmjSUPQSDi4RD105VdAK1ly3Utcmxi42LubkE1dyOUGgKCDcwgESdOBX5Nc2XTl9usHJqjWUFXrKDm_kVAmv_gfaS_tjltcnYFkpl_1T512TU4Hl1i7RCMOnmSM0=w395-h640" width="395" /></a>
+                    </div>
+                    <div class="separator" style="clear: both; text-align: center;">
+                      <b><i>Figure 18: Live Photos via AXIOM</i></b>
+                    </div>
+                    <div class="separator" style="clear: both; text-align: center;">
+                      <br />
+                    </div>
+                    <div class="separator" style="clear: both; text-align: center;">
+                      <span style="color: red; font-family: courier;">00008101-0010541A1130001E_files_full-001.zip\private\var\mobile\Media\DCIM\100APPLE\IMG_0068.MOV</span>
+                    </div>
+                    <div class="separator" style="clear: both; text-align: left;">
+                      <br />
+                    </div>
+                    <div class="separator" style="clear: both; text-align: left;">
+                      If we look at the video pulled from the Live Photo, we can
+                      see that the user was turning in towards where the sign
+                      showed.
+                    </div>
+                    <div style="text-align: center;"><a href="https://gifyu.com/image/S7Cn7"><img alt="IMG_0068.gif" border="0" height="400" src="https://s10.gifyu.com/images/IMG_0068.gif" width="300" /></a></div><div class="separator" style="clear: both; text-align: center;">
+                      <b><i>Figure 19: Live Photo MOV</i></b></div>
+                    <div class="separator" style="clear: both; text-align: left;">
+                      <br />
+                    </div>
+                    <div class="separator" style="clear: both; text-align: left;">
+                      Using the GPS coordinates from EXIF data we can plug those
+                      into Google Maps.</div>
+                    <br /><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgH4fMZ6cQkfyGRWAgeVTVlARv4NWjuml5SgdUj9ojUVXkJpBkFuP6ZwlQPNvXy20lbDJln3D39TNEDVQxsB-UIoJ_burYAYa7bsu7Q0Ullm4VXVo9qkUiwwyBcKwt97Pze4qZBCh1_jfT4ZZ7v9raYv3jBmmstyRArYEJzieSMjczB29xFtzMycpNz" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="774" data-original-width="918" height="539" src="https://blogger.googleusercontent.com/img/a/AVvXsEgH4fMZ6cQkfyGRWAgeVTVlARv4NWjuml5SgdUj9ojUVXkJpBkFuP6ZwlQPNvXy20lbDJln3D39TNEDVQxsB-UIoJ_burYAYa7bsu7Q0Ullm4VXVo9qkUiwwyBcKwt97Pze4qZBCh1_jfT4ZZ7v9raYv3jBmmstyRArYEJzieSMjczB29xFtzMycpNz=w640-h539" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"><b><i>Figure 20: Google Maps coordinates from EXIF of Live Photo</i></b></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: left;">We can see that the car was traveling <span style="background-color: red;">south</span>.</div><h2 style="text-align: left;"><span style="color: red;">Boosting into a new era (25 points)</span></h2></div></div></div></div></div></div></div></div></div></div><blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;"><div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both; text-align: left;"><div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both; text-align: left;"><div><div><div style="text-align: left;">The user was trying to learn German through an application, what promotion featuring a rocket was most commonly shown to the user?</div></div></div></div></div></div></div></div></div></div></div></div></blockquote><div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both; text-align: left;"><div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both; text-align: left;"><div><div><br /></div><div>Looking through the Installed Apps previously I knew Duolingo, which helps you learn how to speak other languages, was installed on the phone.&nbsp;</div><div><br /></div><div><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjeqMpSqTHNsCSyiduHQMiYU9EIZE8mJFAfHQtpQ1H8BVhiResOMLM1FkdsGqPZPzyOt-Z9Gmoc1HCmOb1jXtE4W-WntgqWVGUiG7iNrDt98mn4KpMU9sm5VJfZuANNAb_aAlL5v_j9K9VVD20dIeE9n413cN53URBuy2eD0AVUM__ovXliAY_cgGX7" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="433" data-original-width="743" height="372" src="https://blogger.googleusercontent.com/img/a/AVvXsEjeqMpSqTHNsCSyiduHQMiYU9EIZE8mJFAfHQtpQ1H8BVhiResOMLM1FkdsGqPZPzyOt-Z9Gmoc1HCmOb1jXtE4W-WntgqWVGUiG7iNrDt98mn4KpMU9sm5VJfZuANNAb_aAlL5v_j9K9VVD20dIeE9n413cN53URBuy2eD0AVUM__ovXliAY_cgGX7=w640-h372" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"><b><i>Figure 21: Duolingo installed via iLEAPP report</i></b></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: left;">Searching for "duolingo" led to some video results pulled from:</div><div class="separator" style="clear: both; text-align: left;"><br /></div><div class="separator" style="clear: both; text-align: center;"><span style="color: red; font-family: courier;">00008101-0010541A1130001E_files_full-001.zip\private\var\mobile\Containers\Data\Application\89A6AE48-C46D-4405-A187-C7FF439873F3\Documents\plus-ad-video</span></div><div><br /></div>Only one video ad featured a rocket and that was for <span style="background-color: red;">Super Duolingo</span>.<br /><br /></div>
+                  </div>
+                </div>
+                <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEgkxuDNunTjTnDPHR_pAzz6BqOfVZkqj2cUjsPP4m_0K38st4Epr3ntBu7lNWMp7H_RhrLPY9EHYHBimzzcGGFsgWEJ8yxCyFzHwp0R48PD32tUdmKmZllrox3lj2Q0ETRofCSfftRxWAXjIo26K6zq--M9XWFbhA-jEexacTeOPYdCSbPBd_0GNHkc" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="538" data-original-width="1313" height="262" src="https://blogger.googleusercontent.com/img/a/AVvXsEgkxuDNunTjTnDPHR_pAzz6BqOfVZkqj2cUjsPP4m_0K38st4Epr3ntBu7lNWMp7H_RhrLPY9EHYHBimzzcGGFsgWEJ8yxCyFzHwp0R48PD32tUdmKmZllrox3lj2Q0ETRofCSfftRxWAXjIo26K6zq--M9XWFbhA-jEexacTeOPYdCSbPBd_0GNHkc=w640-h262" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"><b><i>Figure 22: Duolingo rocket ads</i></b></div><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEiZvG-LvyU96W4Vc1a2cjVSTQaSB8v7egNyQERU5UgVF7QkekT91wuzEnCNX_fNRFhoWYo5X_t2Gv90IY_KdEsZfmMAHjuHuEVEPUG016O3930ncYLivw6n-O8fbsv96zM_dBljbNgQ5EgNmSIHb1MKfmilaIE7kgd_VJbOFEFIbRxiAHA-Jhj1CebO" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="472" data-original-width="502" height="602" src="https://blogger.googleusercontent.com/img/a/AVvXsEiZvG-LvyU96W4Vc1a2cjVSTQaSB8v7egNyQERU5UgVF7QkekT91wuzEnCNX_fNRFhoWYo5X_t2Gv90IY_KdEsZfmMAHjuHuEVEPUG016O3930ncYLivw6n-O8fbsv96zM_dBljbNgQ5EgNmSIHb1MKfmilaIE7kgd_VJbOFEFIbRxiAHA-Jhj1CebO=w640-h602" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"><div class="separator" style="clear: both; text-align: center;"><b><i>Figure 23: Duolingo ad</i></b></div><div style="text-align: left;"><h2 style="text-align: left;"><span style="color: red;">As a river runs (50 points)</span></h2></div></div></div></div></div></div></div></div></div></div><blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;"><div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both; text-align: left;"><div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both; text-align: center;"><div style="text-align: left;"><div><div style="text-align: left;">At which location did the user travel the most meters according to Apple? (City, Country)</div></div></div></div></div></div></div></div></div></div></div></div></blockquote><div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both; text-align: left;"><div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both; text-align: left;"><br />The key hear is "according to Apple". What Apple apps track distance? Apple Health of course, which can be found at the path:</div><div class="separator" style="clear: both; text-align: left;"><br /></div><div class="separator" style="clear: both; text-align: left;"><div style="text-align: center;"><span style="font-family: courier;"><span style="color: red;">private\var\mobile\Library\Health\healthdb_secure.sqlite</span></span></div><br />
+              </div>
+              If we sort by Distance (meters) column we see that the most meters recorded was on December 31st, of 2022.</div><div class="separator" style="clear: both; text-align: left;"><br /></div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEj-634ZDagId1ibvGuCjRcm2s0TAY9apZIRaTG9JSZevy6MqcB95akFPH6lLSleado6i8KzELIOBQb6GdY7hHIQ6MQNjfmABiPyXFlafeoArVz9HdlJJdT8qTMamxp-WBdayRFkjAJ-WV1414y4pp7d8Rv2Abvbb13_un9WInahLnN6aSWOcAyLMEvw" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="159" data-original-width="818" height="124" src="https://blogger.googleusercontent.com/img/a/AVvXsEj-634ZDagId1ibvGuCjRcm2s0TAY9apZIRaTG9JSZevy6MqcB95akFPH6lLSleado6i8KzELIOBQb6GdY7hHIQ6MQNjfmABiPyXFlafeoArVz9HdlJJdT8qTMamxp-WBdayRFkjAJ-WV1414y4pp7d8Rv2Abvbb13_un9WInahLnN6aSWOcAyLMEvw=w640-h124" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"><b><i>Figure 24: Apple Health Distance via AXIOM</i></b></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: left;">Applying a timestamp filter for approximately around the same time Health recorded the activity we see some cached locations pulled from RoutineD.</div><br /><div style="text-align: center;"><span style="color: red; font-family: courier;">private\var\mobile\Library\Caches\com.apple.routined\Cache.sqlite</span></div><br />
+            </div>
+            <div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEhT7d4GsUOrA8Ry-xHthz_HoBEFoyvJoOMl6uZuMXBIoU2Cr5jcjvTouhlyauIsqW5JQigrx00jKv-YvK09N4zJ6itTuCrf4zPm9mjdAroTRAF_ZEMvMUNeUYOe_cqifzNpGJlW5SxsClo1rO1RB4LUtdKij2r6ypjqZcU494-9O7I04wDVAEwhXxh2" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="258" data-original-width="302" height="342" src="https://blogger.googleusercontent.com/img/a/AVvXsEhT7d4GsUOrA8Ry-xHthz_HoBEFoyvJoOMl6uZuMXBIoU2Cr5jcjvTouhlyauIsqW5JQigrx00jKv-YvK09N4zJ6itTuCrf4zPm9mjdAroTRAF_ZEMvMUNeUYOe_cqifzNpGJlW5SxsClo1rO1RB4LUtdKij2r6ypjqZcU494-9O7I04wDVAEwhXxh2=w400-h342" width="400" /></a></div><div class="separator" style="clear: both; text-align: center;"><b><i>Figure 25: RoutineD Locations relative to Health event</i></b></div><br />Plugging in the lat/long into Google Maps shows the user was in <span style="background-color: red;">Eltville, Germany</span>.<br /><br />
+          </div><div><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEigYUnY5IRnUWCz6S6SNkR42t917C0Db2lCyGwBhpNw4955_Xd0cZReloUUAR9NGt-LtM7xtsdQtV3y8K0kehhff0L2PsTl_TLbH-6ebgzWM0CTuXUcfsvysjFNp60UXqvT_6lN6VS5zBOMJBSIH5JxXONtJFerhO5tx5lAphHXmO6mAenYkTm7TgbZ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="329" data-original-width="390" height="338" src="https://blogger.googleusercontent.com/img/a/AVvXsEigYUnY5IRnUWCz6S6SNkR42t917C0Db2lCyGwBhpNw4955_Xd0cZReloUUAR9NGt-LtM7xtsdQtV3y8K0kehhff0L2PsTl_TLbH-6ebgzWM0CTuXUcfsvysjFNp60UXqvT_6lN6VS5zBOMJBSIH5JxXONtJFerhO5tx5lAphHXmO6mAenYkTm7TgbZ=w400-h338" width="400" /></a></div><div class="separator" style="clear: both; text-align: center;"><b><i>Figure 26: Google Maps coordinates</i></b></div><h2 style="text-align: left;"><span style="color: red;">Lo Siento Señor, its going to be a cold one (50 points)</span></h2></div></div></div></div></div></div><blockquote style="border: none; margin: 0px 0px 0px 40px; padding: 0px;"><div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both; text-align: left;"><div><div style="text-align: left;">What weather front was warned to the user by youtube?</div></div></div></div></div></div></div></blockquote><div><div class="separator" style="clear: both; text-align: left;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both;"><div class="separator" style="clear: both; text-align: left;"><div><br /></div><div>Weather information from YouTube?! Back to the quick search to hunt "youtube" things. In the Duets Notifications we see one entry that looks to have a title all in Spanish.</div><div><br /></div><div><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEh8F7zgMav2qe6SKcYG6nkUPvEzvUCrKMhOuhm0JWFdH7oVojxKelDlMExtoNBVIYjzQyCQeiLkGtfnjfocvPVfwbvyfvFxwqXHKvw-DbNknKBeTKZ8r6cereFv3hDD5l0-y0dczXfuGqV6d8V7h--9iI7OA8UBcpoeuuXQEBErqRkiN2iJILi7dT0u" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="357" data-original-width="598" height="382" src="https://blogger.googleusercontent.com/img/a/AVvXsEh8F7zgMav2qe6SKcYG6nkUPvEzvUCrKMhOuhm0JWFdH7oVojxKelDlMExtoNBVIYjzQyCQeiLkGtfnjfocvPVfwbvyfvFxwqXHKvw-DbNknKBeTKZ8r6cereFv3hDD5l0-y0dczXfuGqV6d8V7h--9iI7OA8UBcpoeuuXQEBErqRkiN2iJILi7dT0u=w640-h382" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"><b><i>Figure 27: Duet Notifications via AXIOM</i></b></div><br />I had search on YouTube for what this was.</div><div><br /></div><div><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEjHyB6ChqWl5e6mRAolQ4t1X22UQfBglb4uPRAUBiOokFFXXjkhsKL4brW4ePnMg4-8wnHqyj1HOXfaCMHHbLlyughib_1i1ANberq5_CbU-oYV7SXo_TzTl8xcOPiqKotlwMelgIEeC39wryC-aDOlMtguFTrBwtN4q07aTbYkI_DrRI3yR9o591nU" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="329" data-original-width="494" height="266" src="https://blogger.googleusercontent.com/img/a/AVvXsEjHyB6ChqWl5e6mRAolQ4t1X22UQfBglb4uPRAUBiOokFFXXjkhsKL4brW4ePnMg4-8wnHqyj1HOXfaCMHHbLlyughib_1i1ANberq5_CbU-oYV7SXo_TzTl8xcOPiqKotlwMelgIEeC39wryC-aDOlMtguFTrBwtN4q07aTbYkI_DrRI3yR9o591nU=w400-h266" width="400" /></a></div><br />I don't know why I just didn't use Google Translate but it led me to a Univision video showing people shoveling snow.</div><div><br /></div><div><div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEihjJRii_1QBPLRhBudQyEC-KGNOAWW2pS8sh4PS1PeP-OSq2CQbrftZKWPPQoRZ9HLxTN5SEIPVARrBTmidlbtdT5aRmV5w55PNZZxFW4Rl2Qm-FrmLZWr9tVHNLrHwep5PIxZ7dn0SdpJ_Vue6MFoyQ0kzBMPH3L6321_VjD2iXuHW9yBF990uOIK" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="844" data-original-width="1013" height="533" src="https://blogger.googleusercontent.com/img/a/AVvXsEihjJRii_1QBPLRhBudQyEC-KGNOAWW2pS8sh4PS1PeP-OSq2CQbrftZKWPPQoRZ9HLxTN5SEIPVARrBTmidlbtdT5aRmV5w55PNZZxFW4Rl2Qm-FrmLZWr9tVHNLrHwep5PIxZ7dn0SdpJ_Vue6MFoyQ0kzBMPH3L6321_VjD2iXuHW9yBF990uOIK=w640-h533" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;"><b><i>Figure 28: YouTube video from Univision</i></b></div><div class="separator" style="clear: both; text-align: center;"><br /></div><div class="separator" style="clear: both; text-align: left;">I tried "<span style="background-color: red;">frente ártico</span>" because that's what they had in the title and it worked. Translated to English it would be "artic front" which I believe was also accepted as an answer.</div><br />This ends the iPhone writeup and completes the 4 part series from the MVS 2023 CTF. Looking forward to the next one in-person in Nashville!</div></div></div></div></div></div>
+<p></p>
