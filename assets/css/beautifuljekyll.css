@@ -130,7 +130,7 @@ img {
 
 .navbar-custom {
   background-color: {{ site.navbar-col | default: "#5C5C5C" }};
-  border-bottom: 1px solid {{ site.navbar-border-col | default: "#000000" }};
+  border-bottom: 1px solid {{ site.navbar-border-col | default: "#FFFFFF" }};
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   {% if site.navbar-img %}
     background-image: url({{ site.navbar-img | relative_url }});
