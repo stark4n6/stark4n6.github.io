@@ -20,12 +20,12 @@ author: STARK 4N6
 ###############################################
 
 navbar-links:
+  Home: "https://stark4n6.github.io"
   About Me: "aboutme"
   Resources:
     - Forensic StartMe: "https://startme.stark4n6.com"
     - CTF Writeups: "https://www.stark4n6.com/p/ctf-write-ups.html"
   Store: "https://www.teepublic.com/user/stark4n6"
-  Home: "https://stark4n6.github.io"
 
 ################
 # --- Logo --- #
